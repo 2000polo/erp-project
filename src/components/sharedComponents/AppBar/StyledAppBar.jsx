@@ -6,7 +6,7 @@ import MuiAppBar from '@mui/material/AppBar';
 
 import { SIDE_DRAWER_MENU_WIDTH } from '../../../config/appConfig';
 import { useWidth } from '../../../utils/ssrMediaQuery';
-import { Badge, Box, Menu, MenuItem } from '@mui/material';
+import { Badge, Box, InputBase, Menu, MenuItem, alpha } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
 import MoreIcon from '@mui/icons-material/MoreVert';
@@ -14,6 +14,7 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MenuIcon from '@mui/icons-material/Menu';
+import SearchIcon from '@mui/icons-material/Search';
 
 const StyledAppDrawer = (props) => {
 
@@ -58,6 +59,46 @@ const StyledAppDrawer = (props) => {
             duration: theme.transitions.duration.enteringScreen,
             }),
         }),
+    }));
+    
+    const Search = styled('div')(({ theme }) => ({
+        position: 'relative',
+        borderRadius: theme.shape.borderRadius,
+        backgroundColor: alpha(theme.palette.common.white, 0.15),
+        '&:hover': {
+        backgroundColor: alpha(theme.palette.common.white, 0.25),
+        },
+        marginRight: theme.spacing(2),
+        marginLeft: 0,
+        width: '100%',
+        [theme.breakpoints.up('sm')]: {
+        marginLeft: theme.spacing(3),
+        width: 'auto',
+        },
+    }));
+
+    const StyledInputBase = styled(InputBase)(({ theme }) => ({
+        color: 'inherit',
+        '& .MuiInputBase-input': {
+          padding: theme.spacing(1, 1, 1, 0),
+          // vertical padding + font size from searchIcon
+          paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+          transition: theme.transitions.create('width'),
+          width: '100%',
+          [theme.breakpoints.up('md')]: {
+            width: '20ch',
+          },
+        },
+    }));
+    
+    const SearchIconWrapper = styled('div')(({ theme }) => ({
+        padding: theme.spacing(0, 2),
+        height: '100%',
+        position: 'absolute',
+        pointerEvents: 'none',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
     }));
 
     const menuId = 'primary-search-account-menu';
@@ -120,6 +161,17 @@ const StyledAppDrawer = (props) => {
                         </IconButton>
                     }
                     <Box sx={{ flexGrow: 1 }} />
+                        <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+                            <Search>
+                                <SearchIconWrapper>
+                                    <SearchIcon />
+                                </SearchIconWrapper>
+                                <StyledInputBase
+                                    placeholder="Search…"
+                                    inputProps={{ 'aria-label': 'search' }}
+                                />
+                            </Search>
+                        </Box>
                         <Box sx={{ display: { md: 'flex' } }}>
                             <IconButton size="large" aria-label="show 4 new mails" color="inherit">
                                 <Badge badgeContent={4} color="error">
