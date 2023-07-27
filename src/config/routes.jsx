@@ -1,8 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
-import Login from "../views/auth_view/Login";
 import Dashboard from "../views/app_view/Dashboard";
 import Profile from "../views/app_view/Profile";
 import AppView from "../views/app_view";
+import Login from "../views/auth_view/login_v2";
 
 export const router = createBrowserRouter([
     { 
