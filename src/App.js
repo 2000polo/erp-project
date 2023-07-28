@@ -9,7 +9,7 @@ import { darkTheme } from './config/theme/dark';
 export default function App() {
 
   return (
-    <ThemeProvider theme={darkTheme}>
+    <ThemeProvider theme={lightTheme}>
       <RouterProvider router={router} />
     </ThemeProvider>
   );

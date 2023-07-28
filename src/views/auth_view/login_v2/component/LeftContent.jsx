@@ -1,4 +1,4 @@
-import { Apple, Google } from '@mui/icons-material';
+import { Apple, GitHub, Google } from '@mui/icons-material';
 import { Box, Button, Checkbox, Divider, FormControlLabel, InputBase, InputLabel, Paper, Stack, TextField, Typography, alpha, styled } from '@mui/material';
 import { black } from '@mui/material/colors';
 import React from 'react';
@@ -11,18 +11,19 @@ const LeftContent = () => {
         padding: theme.spacing(1),
         // textAlign: 'center',
         color: 'black',
-        height: '98vh',
+        height: '96vh',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        paddingBottom: '70px',
+        // paddingBottom: '70px',
+        // backgroundImage: 'url(../../../../assets/MacBook Pro 14_ - 1.png)'
         // Width: 400
     }));
 
     const StyledButton = styled(Button)(({ theme }) => ({
         textTransform: 'none',
-        border: '1px solid black',
+        border: '1px solid grey',
         color: 'black'
     }))
 
@@ -79,12 +80,15 @@ const LeftContent = () => {
                     <StyledButton size='medium' variant="outlined" startIcon={<Google color='black'/>}>
                         Log in with Google
                     </StyledButton>
-                    <StyledButton size='medium' variant="outlined" startIcon={<Apple color='black'/>}>
+                    {/* <StyledButton size='medium' variant="outlined" startIcon={<Apple color='black'/>}>
                         Log in with Apple
+                    </StyledButton> */}
+                    <StyledButton size='medium' variant="outlined" startIcon={<GitHub color='black'/>}>
+                        Log in with Github
                     </StyledButton>
                 </Stack>
 
-                <Divider sx={{ width: {sx: 0, md: 400}}}>Or</Divider>
+                <Divider sx={{ width: {sx: 0}}}>Or</Divider>
 
                 <Stack mt={2}>
                     <InputLabel m={0} sx={{ color: 'grey' }} shrink htmlFor="bootstrap-input">
@@ -102,10 +106,21 @@ const LeftContent = () => {
                     </InputLabel>
                     <StyledInputField color="primary" id="outlined-basic" label="Outlined" variant="outlined" />
 
-                    <FormControlLabel control={<Checkbox defaultChecked />} label="I agree to the terms and policy" />
-
-                    <Button sx={{mt:3}} variant="contained" size="medium">
-                        Medium
+                    <FormControlLabel 
+                        control={
+                        <Checkbox defaultChecked />} label={
+                            <Typography variant="caption" m={0} gutterBottom>
+                                I agree to the terms and policy
+                            </Typography>
+                        }
+                    />
+                    {/* <Checkbox defaultChecked >
+                        <Typography mt={3} variant="caption" display="block" gutterBottom>
+                            I agree to the terms and policy
+                        </Typography>
+                    </Checkbox> */}
+                    <Button sx={{mt:3, textTransform: 'none',}} variant="contained" size="large">
+                        Sign Up
                     </Button>
                 </Stack>
 
