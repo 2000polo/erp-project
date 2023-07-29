@@ -1,5 +1,5 @@
 import { styled, useTheme } from '@mui/material/styles';
-import { IconButton } from '@mui/material';
+import { IconButton, alpha } from '@mui/material';
 import Divider from '@mui/material/Divider';
 import List from '@mui/material/List';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
@@ -64,7 +64,10 @@ const StyledDrawer = (props) => {
             boxSizing: 'border-box',
             ...(open && {
             ...openedMixin(theme),
-            '& .MuiDrawer-paper': openedMixin(theme),
+            '& .MuiDrawer-paper': {
+                backgroundColor: '#12121200',
+                ...openedMixin(theme)
+            },
             }),
             ...(!open && {
             ...closedMixin(theme),
@@ -74,52 +77,28 @@ const StyledDrawer = (props) => {
     );
 
     const CustomList = styled(List)({
-        '& .MuiListItem-root': {
-          transition: 'background-color 0.3s',
-            '& .Mui-selected': {
-                backgroundColor: theme.palette.primary.main, // Customize the active background color
-                margin: '0 6px 0 5px',
-                borderRadius: '5px',
-                '&:active': {
-                    backgroundColor: theme.palette.primary.main, // Customize the active background color
-                },
-                '&:hover': {
-                    // borderRadius: '5px',
-                    // margin: '0 6px 0 5px',
-                    // backgroundColor: theme.palette.primary.contrastText, // Customize the active background color
-                },
-                
+        margin: '0 6px 0 5px',
+        color: alpha(theme.palette.text.primary, 0.7),
+        '&& .Mui-selected, && .Mui-selected:hover': {
+            borderRadius: '5px',
+            backgroundColor: theme.palette.primary.main,
+            // margin: '0 6px 0 5px',
+            '&, & .MuiListItemIcon-root': {
+            //   color: theme.palette.text.primary,
+              color: 'white',
             },
+          },
+          // hover states
+          '& .MuiListItemButton-root:hover': {
+            borderRadius: '5px',
+            // margin: '0 6px 0 5px',
+            // paddingRight: 0,
+            backgroundColor: theme.palette.background,
+            '&, & .MuiListItemIcon-root': {
+            //   color: 'yellow',
             
-            // '&:hover': {
-            //     borderRadius: '5px',
-            //     // padding: '0 6px 0 5px',
-            //     backgroundColor: theme.palette.primary.main, // Customize the active background color
-            // },
-            
-            // '& .MuiListItem-container': {
-            //     margin: '0 6px 0 5px',
-            //     borderRadius: '5px',
-            //     // '&:hover': {
-            //     //     margin: '0 6px 0 5px',
-            //     //     borderRadius: '5px',
-            //     //     // backgroundColor: theme.palette.primary.main, // Customize the hover background color
-            //     // },
-            //     // backgroundColor: theme.palette.primary.main, // Customize the hover background color
-            // },
-        },
-        // '&:hover': {
-        //     borderRadius: '5px',
-        //     // padding: '0 6px 0 5px',
-        //     backgroundColor: theme.palette.primary.main, // Customize the active background color
-        // },
-        '& .MuiListItem-container': {
-            '&:hover': {
-                borderRadius: '5px',
-                margin: '0 6px 0 5px',
-                backgroundColor: theme.palette.background, // Customize the active background color
             },
-        },
+          },
     });
     const CustomListItem = styled(ListItem)({
         '& .MuiListItem-container': {
@@ -148,12 +127,12 @@ const StyledDrawer = (props) => {
                 <Divider />
                 <CustomList>
                 {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                    <CustomListItem key={text} disablePadding sx={{ display: 'block' }}>
+                    <CustomListItem key={text} disablePadding sx={{ display: 'block', mt: .5 }}>
                     <ListItemButton
                         sx={{
                         minHeight: 48,
                         justifyContent: props?.open ? 'initial' : 'center',
-                        px: selectedIndex === index ? 1.9 : 2.5,
+                        px: 2.5,
                         }}
                         selected={selectedIndex === index}
                         onClick={(event) => handleListItemClick(event, index)}
@@ -173,30 +152,6 @@ const StyledDrawer = (props) => {
                 ))}
                 </CustomList>
                 <Divider />
-                <List>
-                {['All mail', 'Trash', 'Spam'].map((text, index) => (
-                    <ListItem key={text} disablePadding sx={{ display: 'block' }}>
-                    <ListItemButton
-                        sx={{
-                        minHeight: 48,
-                        justifyContent: props?.open ? 'initial' : 'center',
-                        px: 2.5,
-                        }}
-                    >
-                        <ListItemIcon
-                        sx={{
-                            minWidth: 0,
-                            mr: props?.open ? 3 : 'auto',
-                            justifyContent: 'center',
-                        }}
-                        >
-                        {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                        </ListItemIcon>
-                        <ListItemText primary={text} sx={{ opacity: props?.open ? 1 : 0 }} />
-                    </ListItemButton>
-                    </ListItem>
-                ))}
-                </List>
             </Drawer>
         </>
     )

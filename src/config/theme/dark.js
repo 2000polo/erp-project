@@ -11,7 +11,7 @@ export const darkTheme = createTheme({
       main: pink[300], // Customize the secondary color for dark theme
     },
     background: {
-      default: grey[900], // Customize the default background color for dark theme
+      default: '#191D29', // Customize the default background color for dark theme
     },
   },
   // Other dark theme customizations (typography, spacing, etc.) can be added here

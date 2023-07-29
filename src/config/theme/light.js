@@ -11,7 +11,7 @@ export const lightTheme = createTheme({
         main: pink[500], // Customize the secondary color for light theme
       },
       background: {
-        default: grey[100], // Customize the default background color for light theme
+        default: grey[200], // Customize the default background color for light theme
       },
     },
     // Other light theme customizations (typography, spacing, etc.) can be added here
