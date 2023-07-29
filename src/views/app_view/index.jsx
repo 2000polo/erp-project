@@ -42,8 +42,7 @@ const AppView = () => {
                 <StyledDrawer open={open} setOpen={setOpen} /> :
                 <SwipeableTemporaryDrawer state={state} toggleDrawer={toggleDrawer}  />
             }
-            <Box component="main" sx={{ flexGrow: 1, p: 3, pt: 6 }}>
-                {/* <DrawerHeader  /> */}
+            <Box component="main" sx={{ flexGrow: 1, p: 3, pt: 8 }}>
                 <Outlet />
 
             </Box>

@@ -6,7 +6,7 @@ import MuiAppBar from '@mui/material/AppBar';
 
 import { SIDE_DRAWER_MENU_WIDTH } from '../../../config/appConfig';
 import { useWidth } from '../../../utils/ssrMediaQuery';
-import { Badge, Box, InputBase, Menu, MenuItem, alpha } from '@mui/material';
+import { Badge, Box, InputBase, Menu, MenuItem, Stack, alpha } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
 import MoreIcon from '@mui/icons-material/MoreVert';
@@ -15,6 +15,7 @@ import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
+import AvatarDropDown from '../AvatarDropDown';
 
 const StyledAppDrawer = (props) => {
 
@@ -46,6 +47,7 @@ const StyledAppDrawer = (props) => {
     const AppBar = styled(MuiAppBar, {
         shouldForwardProp: (prop) => prop !== 'open',
         })(({ theme, open }) => ({
+        boxShadow: 'none',
         zIndex: (width === 'xs' || width === 'sm') ? theme.zIndex.drawer - 1 : theme.zIndex.drawer + 1,
         transition: theme.transitions.create(['width', 'margin'], {
             easing: theme.transitions.easing.sharp,
@@ -57,16 +59,21 @@ const StyledAppDrawer = (props) => {
             transition: theme.transitions.create(['width', 'margin'], {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.enteringScreen,
+            // backgroundColor: 'red'
             }),
         }),
+        // '& .MuiAppBar-root': {
+        //     '& .MuiAppBar-colorTransparent':{
+        //     }
+        // }
     }));
     
     const Search = styled('div')(({ theme }) => ({
         position: 'relative',
-        borderRadius: theme.shape.borderRadius,
-        backgroundColor: alpha(theme.palette.common.white, 0.15),
+        borderRadius: theme.shape.borderRadius + 5,
+        backgroundColor: alpha(theme.palette.common.white, 0.05),
         '&:hover': {
-        backgroundColor: alpha(theme.palette.common.white, 0.25),
+        backgroundColor: alpha(theme.palette.common.white, 0.05),
         },
         marginRight: theme.spacing(2),
         marginLeft: 0,
@@ -131,7 +138,7 @@ const StyledAppDrawer = (props) => {
 
     return (
         <>
-            <AppBar  position="fixed" open={props.open}>
+            <AppBar color='transparent' position="fixed" open={props.open}>
                 <Toolbar>
                     {
                         ['xl', 'lg', 'md'].includes(width) ?
@@ -172,7 +179,7 @@ const StyledAppDrawer = (props) => {
                                 />
                             </Search>
                         </Box>
-                        <Box sx={{ display: { md: 'flex' } }}>
+                        <Stack spacing={2} direction='row'>
                             <IconButton size="large" aria-label="show 4 new mails" color="inherit">
                                 <Badge badgeContent={4} color="error">
                                     <MailIcon />
@@ -187,7 +194,7 @@ const StyledAppDrawer = (props) => {
                                 <NotificationsIcon />
                             </Badge>
                             </IconButton>
-                            <IconButton
+                            {/* <IconButton
                             size="large"
                             edge="end"
                             aria-label="account of current user"
@@ -197,8 +204,9 @@ const StyledAppDrawer = (props) => {
                             color="inherit"
                             >
                             <AccountCircle />
-                            </IconButton>
-                        </Box>
+                            </IconButton> */}
+                            <AvatarDropDown />
+                        </Stack>
                         {/* <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
                             <IconButton
                             size="large"
