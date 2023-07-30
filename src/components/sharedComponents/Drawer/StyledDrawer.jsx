@@ -13,11 +13,12 @@ import MailIcon from '@mui/icons-material/Mail';
 import MuiDrawer from '@mui/material/Drawer';
 import React, { useState } from 'react';
 import { SIDE_DRAWER_MENU_WIDTH } from '../../../config/appConfig';
+import { router } from '../../../config/routes';
 
 const StyledDrawer = (props) => {
 
     const theme = useTheme();
-
+    const routes = router.routes[1].children;
     const [selectedIndex, setSelectedIndex] = useState(0);
 
     const handleListItemClick = (event, index) => {
@@ -114,6 +115,8 @@ const StyledDrawer = (props) => {
     const handleDrawerClose = () => {
         props.setOpen(false);
     };
+
+    console.log("printing routes inside the sidebar", router.routes[1].children)
     
 
     return (
@@ -126,8 +129,8 @@ const StyledDrawer = (props) => {
                 </DrawerHeader>
                 <Divider />
                 <CustomList>
-                {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                    <CustomListItem key={text} disablePadding sx={{ display: 'block', mt: .5 }}>
+                {routes.map((routeObj, index) => (
+                    <CustomListItem key={routeObj.title} disablePadding sx={{ display: 'block', mt: .5 }}>
                     <ListItemButton
                         sx={{
                         minHeight: 48,
@@ -146,7 +149,7 @@ const StyledDrawer = (props) => {
                         >
                         {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
                         </ListItemIcon>
-                        <ListItemText primary={text} sx={{ opacity: props?.open ? 1 : 0 }} />
+                        <ListItemText primary={routeObj.title} sx={{ opacity: props?.open ? 1 : 0 }} />
                     </ListItemButton>
                     </CustomListItem>
                 ))}

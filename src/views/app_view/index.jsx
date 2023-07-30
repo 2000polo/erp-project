@@ -43,8 +43,8 @@ const AppView = () => {
                 <SwipeableTemporaryDrawer state={state} toggleDrawer={toggleDrawer}  />
             }
             <Box component="main" sx={{ flexGrow: 1, p: 3, pt: 8 }}>
+                {/* keep it simple but significant */}
                 <Outlet />
-
             </Box>
         </Box>
     );
