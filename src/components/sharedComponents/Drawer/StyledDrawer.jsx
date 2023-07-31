@@ -14,18 +14,20 @@ import MuiDrawer from '@mui/material/Drawer';
 import React, { useState } from 'react';
 import { SIDE_DRAWER_MENU_WIDTH } from '../../../config/appConfig';
 import { router } from '../../../config/routes';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const StyledDrawer = (props) => {
 
     const theme = useTheme();
     const routes = router.routes[1].children;
-    const [selectedIndex, setSelectedIndex] = useState(0);
+    const location = useLocation();
 
-    const handleListItemClick = (event, index) => {
-        setSelectedIndex(index);
+    const navigate = useNavigate();
+
+    const handleListItemClick = (event, index, pathname) => {
+        console.log("pathname ", pathname)
+        navigate(pathname);
     };
-
-    console.log("theme ", theme.palette)
 
     const DrawerHeader = styled('div')(({ theme }) => ({
         display: 'flex',
@@ -130,15 +132,14 @@ const StyledDrawer = (props) => {
                 <Divider />
                 <CustomList>
                 {routes.map((routeObj, index) => (
-                    <CustomListItem key={routeObj.title} disablePadding sx={{ display: 'block', mt: .5 }}>
+                    <CustomListItem onClick={(event) => handleListItemClick(event, index, routeObj.path)} key={routeObj.title} disablePadding sx={{ display: 'block', mt: .5 }}>
                     <ListItemButton
                         sx={{
                         minHeight: 48,
                         justifyContent: props?.open ? 'initial' : 'center',
                         px: 2.5,
                         }}
-                        selected={selectedIndex === index}
-                        onClick={(event) => handleListItemClick(event, index)}
+                        selected={location.pathname === routeObj.path }
                     >
                         <ListItemIcon
                         sx={{
