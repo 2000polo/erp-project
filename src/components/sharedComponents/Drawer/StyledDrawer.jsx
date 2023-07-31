@@ -21,14 +21,13 @@ const StyledDrawer = (props) => {
     const theme = useTheme();
     const routes = router.routes[1].children;
     const location = useLocation();
-    
+
     const navigate = useNavigate();
 
     const handleListItemClick = (event, index, pathname) => {
         console.log("pathname ", pathname)
         navigate(pathname);
     };
-
 
     const DrawerHeader = styled('div')(({ theme }) => ({
         display: 'flex',
