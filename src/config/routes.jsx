@@ -24,6 +24,28 @@ export const router = createBrowserRouter([
           title: 'Dashboard'
         },
         {
+          path: "/app/projects",
+          Component: Profile,
+          title: 'Projects'
+        },
+        {
+          path: "/app/tasks",
+          Component: Profile,
+          title: 'Tasks',
+          children: [
+            {
+              path: "/app/tasks/projects",
+              Component: Profile,
+              title: 'Open a Ticket'
+            },
+            {
+              path: "/app/tasks/projects",
+              Component: Profile,
+              title: 'Taks'
+            },
+          ]
+        },
+        {
           path: "/app/profile",
           Component: Profile,
           title: 'Profile'
