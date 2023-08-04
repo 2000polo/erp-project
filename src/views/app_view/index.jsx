@@ -40,7 +40,7 @@ const AppView = () => {
             {
                 ['xl', 'lg', 'md'].includes(width) ?
                 <StyledDrawer open={open} setOpen={setOpen} /> :
-                <SwipeableTemporaryDrawer state={state} toggleDrawer={toggleDrawer}  />
+                <SwipeableTemporaryDrawer state={state} toggleDrawer={toggleDrawer}  open={open} setOpen={setOpen} />
             }
             <Box component="main" sx={{ flexGrow: 1, p: 3, pt: 8 }}>
                 {/* keep it simple but significant */}
