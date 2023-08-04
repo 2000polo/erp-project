@@ -179,7 +179,7 @@ const StyledAppDrawer = (props) => {
                                 />
                             </Search>
                         </Box>
-                        <Stack spacing={2} direction='row'>
+                        <Stack sx={{ display: { xs: 'none', sm: 'block' } }} spacing={0} direction='row'>
                             <IconButton size="large" aria-label="show 4 new mails" color="inherit">
                                 <Badge badgeContent={4} color="error">
                                     <MailIcon />
@@ -205,8 +205,9 @@ const StyledAppDrawer = (props) => {
                             >
                             <AccountCircle />
                             </IconButton> */}
-                            <AvatarDropDown />
                         </Stack>
+                        <AvatarDropDown />
+
                         {/* <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
                             <IconButton
                             size="large"

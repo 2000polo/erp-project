@@ -11,7 +11,7 @@ import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import MuiDrawer from '@mui/material/Drawer';
-import React, { useState } from 'react';
+import React from 'react';
 import { SIDE_DRAWER_MENU_WIDTH } from '../../../config/appConfig';
 import { router } from '../../../config/routes';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -21,6 +21,7 @@ const StyledDrawer = (props) => {
     const theme = useTheme();
     const routes = router.routes[1].children;
     const location = useLocation();
+    const [open, setOpen] = React.useState(true);
 
     const navigate = useNavigate();
 
@@ -118,6 +119,10 @@ const StyledDrawer = (props) => {
         props.setOpen(false);
     };
 
+
+    const handleClick = () => {
+      setOpen(!open);
+    };
     console.log("printing routes inside the sidebar", router.routes[1].children)
     
 
@@ -154,6 +159,23 @@ const StyledDrawer = (props) => {
                     </ListItemButton>
                     </CustomListItem>
                 ))}
+                {/* <ListItemButton onClick={handleClick}>
+                    <ListItemIcon>
+                    <InboxIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Inbox" />
+                    {open ? <ExpandLess /> : <ExpandMore />}
+                </ListItemButton>
+                <Collapse in={open} timeout="auto" unmountOnExit>
+                    <CustomList component="div" disablePadding>
+                        <ListItemButton sx={{ pl: 4 }}>
+                        <ListItemIcon>
+                            <StarBorder />
+                        </ListItemIcon>
+                        <ListItemText primary="Starred" />
+                        </ListItemButton>
+                    </CustomList>
+                </Collapse> */}
                 </CustomList>
                 <Divider />
             </Drawer>
