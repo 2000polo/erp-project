@@ -1,5 +1,5 @@
 import { styled, useTheme } from '@mui/material/styles';
-import { IconButton, alpha } from '@mui/material';
+import { Collapse, IconButton, alpha } from '@mui/material';
 import Divider from '@mui/material/Divider';
 import List from '@mui/material/List';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
@@ -15,6 +15,7 @@ import React from 'react';
 import { SIDE_DRAWER_MENU_WIDTH } from '../../../config/appConfig';
 import { router } from '../../../config/routes';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { ExpandLess, ExpandMore, StarBorder } from '@mui/icons-material';
 
 const StyledDrawer = (props) => {
 
@@ -22,6 +23,7 @@ const StyledDrawer = (props) => {
     const routes = router.routes[1].children;
     const location = useLocation();
     const [open, setOpen] = React.useState(true);
+    const [isSubmenuOpen, setisSubmenuOpen] = React.useState({})
 
     const navigate = useNavigate();
 
@@ -120,11 +122,87 @@ const StyledDrawer = (props) => {
     };
 
 
-    const handleClick = () => {
-      setOpen(!open);
+    const handleClick = (index) => {
+        setisSubmenuOpen({...isSubmenuOpen, [`listItem${index}`]: !isSubmenuOpen?.[`listItem${index}`]})
     };
-    console.log("printing routes inside the sidebar", router.routes[1].children)
+    console.log("printing isSubmenu state", isSubmenuOpen)
     
+    const itemList = (routes, type) => {
+        return routes.map((routeObj, index) => {
+            if(routeObj?.children){
+                // return itemList(routeObj?.children)
+                return (
+                    <>
+                        <ListItemButton
+                            sx={{
+                                minHeight: 48,
+                                // justifyContent: props?.open ? 'initial' : 'center',
+                                px: 2.5,
+                            }}
+                            onClick={() => handleClick(index)}>
+                            <ListItemIcon 
+                                sx={{
+                                    minWidth: 0,
+                                    mr: props?.open ? 3 : 'auto',
+                                    justifyContent: 'center',
+                                }}
+                            >
+                            <InboxIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Inbox" />
+                            {isSubmenuOpen[`listItem${index}`] ? <ExpandLess /> : <ExpandMore />}
+                        </ListItemButton>
+                        <Collapse in={isSubmenuOpen[`listItem${index}`]} timeout="auto" unmountOnExit>
+                            {
+                                itemList(routeObj?.children, 'sub')
+                            }
+                        </Collapse>
+                    </>
+                )
+            }else{
+                return (
+                    <CustomListItem onClick={(event) => handleListItemClick(event, index, routeObj.path)} key={routeObj.title} disablePadding sx={{ display: 'block', mt: .5 }}>
+                        <ListItemButton
+                            sx={{
+                            minHeight: 48,
+                            justifyContent: props?.open ? 'initial' : 'center',
+                            px: 2.5,
+                            }}
+                            selected={location.pathname === routeObj.path }
+                        >
+                            {
+                                type === 'sub' ?
+                                <>
+                                    <ListItemIcon
+                                        sx={{
+                                            minWidth: 0,
+                                            mr: props?.open ? 3 : 'auto',
+                                            justifyContent: 'center',
+                                        }}
+                                    >
+                                    {/* {index % 2 === 0 ? <InboxIcon /> : <MailIcon />} */}
+                                    </ListItemIcon>
+                                    <ListItemText primary={routeObj.title} sx={{ opacity: props?.open ? 1 : 0 }} />
+                                </> :
+                                <>
+                                    <ListItemIcon
+                                        sx={{
+                                            minWidth: 0,
+                                            mr: props?.open ? 3 : 'auto',
+                                            justifyContent: 'center',
+                                        }}
+                                    >
+                                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                                    </ListItemIcon>
+                                    <ListItemText primary={routeObj.title} sx={{ opacity: props?.open ? 1 : 0 }} />
+                                </>
+                            }
+                        </ListItemButton>
+                    </CustomListItem>
+                )
+            }
+        })
+    }
 
     return (
         <>
@@ -136,7 +214,7 @@ const StyledDrawer = (props) => {
                 </DrawerHeader>
                 <Divider />
                 <CustomList>
-                {routes.map((routeObj, index) => (
+                {/* {routes.map((routeObj, index) => (
                     <CustomListItem onClick={(event) => handleListItemClick(event, index, routeObj.path)} key={routeObj.title} disablePadding sx={{ display: 'block', mt: .5 }}>
                     <ListItemButton
                         sx={{
@@ -158,7 +236,8 @@ const StyledDrawer = (props) => {
                         <ListItemText primary={routeObj.title} sx={{ opacity: props?.open ? 1 : 0 }} />
                     </ListItemButton>
                     </CustomListItem>
-                ))}
+                ))} */}
+                {itemList(routes)}
                 {/* <ListItemButton onClick={handleClick}>
                     <ListItemIcon>
                     <InboxIcon />
@@ -175,6 +254,33 @@ const StyledDrawer = (props) => {
                         <ListItemText primary="Starred" />
                         </ListItemButton>
                     </CustomList>
+                </Collapse>
+                <ListItemButton onClick={handleClick}>
+                    <ListItemIcon>
+                    <InboxIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Inbox" />
+                    {open ? <ExpandLess /> : <ExpandMore />}
+                </ListItemButton>
+                <Collapse in={open} timeout="auto" unmountOnExit>
+                    <CustomList component="div" disablePadding>
+                        <ListItemButton sx={{ pl: 4 }}>
+                        <ListItemIcon>
+                            <StarBorder />
+                        </ListItemIcon>
+                        <ListItemText primary="Starred" />
+                        </ListItemButton>
+                    </CustomList>
+                </Collapse> */}
+                {/* <Collapse in={open} timeout="auto" unmountOnExit>
+                    <List component="div" disablePadding>
+                    <ListItemButton sx={{ pl: 4 }}>
+                        <ListItemIcon>
+                        <StarBorder />
+                        </ListItemIcon>
+                        <ListItemText primary="Starred" />
+                    </ListItemButton>
+                    </List>
                 </Collapse> */}
                 </CustomList>
                 <Divider />
