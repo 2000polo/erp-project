@@ -35,21 +35,39 @@ export const router = createBrowserRouter([
           title: 'Tasks',
           children: [
             {
-              path: "/app/tasks/projects",
+              path: "/app/tasks/tickets",
               Component: Profile,
               title: 'Open a Ticket'
             },
             {
               path: "/app/tasks/projects",
               Component: Profile,
-              title: 'Taks'
+              title: 'Taks',
             },
           ]
         },
         {
+          path: "/app/my-tasks",
+          Component: Profile,
+          title: 'My Tasks'
+        },
+        {
           path: "/app/profile",
           Component: Profile,
-          title: 'Profile'
+          title: 'Profile',
+          
+          children: [
+            {
+              path: "/app/profile/dw",
+              Component: Profile,
+              title: 'Open a Ticket'
+            },
+            {
+              path: "/app/profile/sfsf",
+              Component: Profile,
+              title: 'Taks',
+            },
+          ]
         },
       ] 
     },
