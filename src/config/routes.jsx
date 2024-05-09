@@ -4,6 +4,7 @@ import Dashboard from "../views/app_view/employee_view/dashboard"; //employee
 import Profile from "../views/app_view/Admin/Profile";
 import AppView from "../views/app_view";
 import Login from "../views/auth_view/login_v2";
+import Tasks from "../views/app_view/employee_view/Tasks";
 
 export const router = createBrowserRouter([
     { 
@@ -25,32 +26,32 @@ export const router = createBrowserRouter([
           title: 'Dashboard'
         },
         {
-          path: "/app/projects",
-          Component: Profile,
-          title: 'Projects'
-        },
-        {
           path: "/app/tasks",
-          Component: Profile,
-          title: 'Tasks',
-          children: [
-            {
-              path: "/app/tasks/tickets",
-              Component: Profile,
-              title: 'Open a Ticket'
-            },
-            {
-              path: "/app/tasks/projects",
-              Component: Profile,
-              title: 'Taks',
-            },
-          ]
+          Component: Tasks,
+          title: 'Tasks'
         },
-        {
-          path: "/app/my-tasks",
-          Component: Profile,
-          title: 'My Tasks'
-        },
+        // {
+        //   path: "/app/tasks",
+        //   Component: Profile,
+        //   title: 'Tasks',
+        //   children: [
+        //     {
+        //       path: "/app/tasks/tickets",
+        //       Component: Profile,
+        //       title: 'Open a Ticket'
+        //     },
+        //     {
+        //       path: "/app/tasks/projects",
+        //       Component: Profile,
+        //       title: 'Taks',
+        //     },
+        //   ]
+        // },
+        // {
+        //   path: "/app/my-tasks",
+        //   Component: Tasks,
+        //   title: 'My Tasks'
+        // },
         {
           path: "/app/profile",
           Component: Profile,

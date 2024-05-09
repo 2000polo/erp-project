@@ -59,7 +59,7 @@ const TaskList = () => {
             backgroundColor: 'rgba(100, 95, 228, 0.32)',
           },
         }),
-    );
+      );
 
     
     function a11yProps(index) {
