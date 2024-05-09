@@ -1,0 +1,24 @@
+.card {
+    cursor: grab;
+}
+
+.card:active {
+    cursor: grabbing;
+}
+
+.card {
+    transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+.card.dragging {
+    opacity: .5;
+    transform: scale(.8);
+}
+
+.column{
+    width: 400px;
+    /* background-color: rgba(240, 248, 255, 0.247); */
+    border-radius: 5px;
+    /* padding: 5px; */
+    min-height: 75vh;
+}
