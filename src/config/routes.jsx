@@ -27,8 +27,20 @@ export const router = createBrowserRouter([
         },
         {
           path: "/app/tasks",
-          Component: Tasks,
-          title: 'Tasks'
+          // Component: Tasks,
+          title: 'Tasks',
+          children: [
+            {
+              path: "/app/tasks/task-list",
+              // Component: 'Task List',
+              title: 'Task List'
+            },
+            {
+              path: "/app/tasks/kanban-board",
+              Component: Tasks,
+              title: 'Kanban Board'
+            },
+          ]
         },
         // {
         //   path: "/app/tasks",

@@ -4,6 +4,8 @@ import { Grid } from '@mui/material';
 import TaskList from './components/task_list';
 import Kanban from '../../../../components/globalComponents/Kanban';
 import AddPorjectCard from './components/AddPorjectCard';
+import Schedules from './components/Schedules';
+import TaskOverview from './components/TaskOverview';
 
 const Dashboard = () => {
 
@@ -41,18 +43,6 @@ const Dashboard = () => {
         <>
         <Grid container spacing={2} direction="column" >
             <Grid container item spacing={2} direction="row" justifyContent= 'space-between'>
-                {/* <Grid item xs={3} >
-                    <ProjectCard />
-                </Grid>
-                <Grid item xs={3}>
-                    <ProjectCard />
-                </Grid>
-                <Grid item xs={3}>
-                    <ProjectCard />
-                </Grid>
-                <Grid item xs={3}>
-                    <ProjectCard />
-                </Grid> */}
                 {
                     projectStatus?.map((project) => {
                         return (
@@ -69,28 +59,16 @@ const Dashboard = () => {
                     </Grid> :
                     ''
                 }
-                
             </Grid>
-            {/* <Grid container item spacing={2} direction="row" justifyContent= 'space-between' >
-                <Grid item xs={3} >
-                    <ProjectCard />
+            <Grid container item spacing={2} direction="row" justifyContent= 'space-between'>
+                <Grid item xs={9}>
+                    <TaskOverview />
                 </Grid>
                 <Grid item xs={3}>
-                    <ProjectCard />
-                </Grid>
-                <Grid item xs={3}>
-                    <ProjectCard />
-                </Grid>
-                <Grid item xs={3}>
-                    <ProjectCard />
+                    <Schedules />
                 </Grid>
             </Grid>
-            <Grid container item spacing={2} direction="row" justifyContent= 'space-between' >
-                <Grid item xs={3} >
-                    <TaskList />
-                </Grid>
-            </Grid> */}
-            {/* <Kanban /> */}
+            
         </Grid>
         </>
     )
