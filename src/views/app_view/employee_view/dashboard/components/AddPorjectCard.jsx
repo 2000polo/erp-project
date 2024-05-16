@@ -1,4 +1,4 @@
-import { Box, Card, Typography, alpha, styled, useTheme } from '@mui/material'
+import { Box, Card, CardActionArea, Typography, alpha, styled, useTheme } from '@mui/material'
 import React from 'react'
 import FolderIcon from '@mui/icons-material/Folder';
 import { AddCardRounded } from '@mui/icons-material';
@@ -44,33 +44,35 @@ const AddPorjectCard = () => {
     })
         
     return (
-        <StyledCard>
-            <DottedCard>
-                <Box 
-                    sx={{
-                        // width: '100%',
-                        height: '100%',
-                        // backgroundColor: 'primary.dark',
-                        // '&:hover': {
-                        backgroundColor: alpha(theme.palette.primary.main, 0.3),
-                        // opacity: [0.2, 0.5, 0.5],
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        borderRadius: '5px',
-                        padding: '5px',
-                        marginBottom: '5px'
-                        // },
-                    }}
-                >
-                    <AddCardRounded />
-                </Box>
-                <Typography color={alpha(theme.palette.text.primary, 0.7)} variant="caption" display="block" gutterBottom>
-                    Click to add New Project
-                </Typography>
-            </DottedCard>
-        </StyledCard>
+        <CardActionArea>
+            <StyledCard>
+                <DottedCard>
+                    <Box 
+                        sx={{
+                            // width: '100%',
+                            height: '100%',
+                            // backgroundColor: 'primary.dark',
+                            // '&:hover': {
+                            backgroundColor: alpha(theme.palette.primary.main, 0.3),
+                            // opacity: [0.2, 0.5, 0.5],
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            borderRadius: '5px',
+                            padding: '5px',
+                            marginBottom: '5px'
+                            // },
+                        }}
+                    >
+                        <AddCardRounded />
+                    </Box>
+                    <Typography color={alpha(theme.palette.text.primary, 0.7)} variant="caption" display="block" gutterBottom>
+                        Click to add New Project
+                    </Typography>
+                </DottedCard>
+            </StyledCard>
+        </CardActionArea>
     )
 }
 

@@ -149,7 +149,7 @@ const StyledDrawer = (props) => {
                             >
                             <InboxIcon />
                             </ListItemIcon>
-                            <ListItemText primary="Inbox" />
+                            <ListItemText primary={routeObj.title} />
                             {isSubmenuOpen[`listItem${index}`] ? <ExpandLess /> : <ExpandMore />}
                         </ListItemButton>
                         <Collapse in={isSubmenuOpen[`listItem${index}`]} timeout="auto" unmountOnExit>
