@@ -7,64 +7,29 @@ const TaskOverview = () => {
     const theme = useTheme();
 
     const StyledCard = styled(Card)({
-        // maxWidth: '345px',
-        // minHeight: '200px',
         backgroundColor: theme.palette.background.default,
-        // background: 'linear-gradient(to top, #396afc, #2948ff);',
         borderRadius: '10px',
         boxShadow: '2px 2px 4px rgba(0, 0, 0, 0.2)',
-        // transition: 'all ease-in 2s',
         padding: '12px',
-
-        // '&:hover':{
         //     // transform: 'scale(1.05)',
         //     background: 'linear-gradient(to top, #396afc, #2948ff);',
         // }
     })
 
     const StyledDataGrid = styled(DataGrid)({
-        // root: {
-        //     '& .MuiDataGrid-renderingZone': {
-        //         maxHeight: 'none !important',
-        
-        //     },
-        //     '& .MuiDataGrid-cell': {
-        //         lineHeight: 'unset !important',
-        //         maxHeight: 'none !important',
-        //     },
-        //     '& .MuiDataGrid-root .MuiDataGrid-cell ': {
-        //         maxHeight: 'none !important',
-        //         minHeight: 'mpne !important'
-        //     },
-        //     '& .MuiDataGrid-virtualScrollerRenderZone .MuiDataGrid-row ' : {
-        //         maxHeight: 'none !important',
-        
-        //     },
-        //     '.MuiDataGrid-columnSeparator': {
-        //         display: 'none',
-        //     },
-        //     '&.MuiDataGrid-root': {
-        //         border: 'none',
-        //     },
-           
-        // },
-        // color: 'red',
         borderColor: "#09090b00",
-        // root: {
-            '.MuiDataGrid-root': {
-              backgroundColor: 'red', // Change the background color of the grid
-            },
-            '.MuiDataGrid-row': {
-              color: 'whitesmoke', // Change the text color of rows
-            },
-            ' .MuiDataGrid-columnHeaders': {
-              backgroundColor: 'red !important', // Change the background color of column headers
-            },
-            '.css-teffd5-MuiDataGrid-root': {
-                BorderColor: 'none'
-            },
-        // },
-        
+        '.MuiDataGrid-root': {
+            backgroundColor: 'red', // Change the background color of the grid
+        },
+        '.MuiDataGrid-row': {
+            color: 'whitesmoke', // Change the text color of rows
+        },
+        ' .MuiDataGrid-columnHeaders': {
+            backgroundColor: 'red !important', // Change the background color of column headers
+        },
+        '.css-teffd5-MuiDataGrid-root': {
+            BorderColor: 'none'
+        },
     });
 
     const columns = [
