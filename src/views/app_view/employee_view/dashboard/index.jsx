@@ -1,11 +1,12 @@
 import React from 'react';
 import ProjectCard from './components/ProjectCard';
-import { Grid } from '@mui/material';
+import { Grid, Stack } from '@mui/material';
 import TaskList from './components/task_list';
 import Kanban from '../../../../components/globalComponents/Kanban';
 import AddPorjectCard from './components/AddPorjectCard';
 import Schedules from './components/Schedules';
 import TaskOverview from './components/TaskOverview';
+import MeetingsNotifications from './components/MeetingsNotifications';
 
 const Dashboard = () => {
 
@@ -61,13 +62,25 @@ const Dashboard = () => {
                 }
             </Grid>
             <Grid container item spacing={2} direction="row" justifyContent= 'space-between'>
+                {/* <Grid item xs={9}>
+                    <TaskOverview />
+                </Grid> */}
                 <Grid item xs={9}>
                     <TaskOverview />
                 </Grid>
-                <Grid item xs={3}>
-                    <Schedules />
+                
+                <Grid xs={3} container item  direction="row" justifyContent= 'space-between'>
+                    
+                    <Stack spacing={2}>
+                        <MeetingsNotifications />
+                        <Schedules />
+                    </Stack>{/* <Grid item xs={12}> */}
+                    {/* </Grid> */}
+                    {/* <Grid item xs={12}> */}
+                    {/* </Grid> */}
                 </Grid>
             </Grid>
+            
             
         </Grid>
         </>
