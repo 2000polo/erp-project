@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react'
 import ListComponenct from './ListComponent';
-import { Box, Fab, Grid, Stack, Tab, Tabs, tabsClasses, useTheme } from '@mui/material';
-import { AddCard, AddCircleOutline } from '@mui/icons-material';
-import styled from 'styled-components';
+import { Box, Fab, Grid, Stack, Tab, Tabs, styled, tabsClasses, useTheme } from '@mui/material';
+import { AddCard, AddCircleOutline, Groups, Person } from '@mui/icons-material';
 import { red } from '@mui/material/colors';
 
 const initialState = [
@@ -283,22 +282,30 @@ const DragAndDrop = () => {
 
     });
 
-    const StyledTab = styled((props) => <Tab disableRipple {...props} />)(
-        ({ theme }) => ({
-          textTransform: 'none',
-        //   fontWeight: theme.typography.fontWeightRegular,
-        //   fontSize: theme.typography.pxToRem(15),
-        //   marginRight: theme.spacing(1),
-          color: 'rgba(255, 255, 255, 0.7)',
-          '&.Mui-selected': {
-            color: '#fff',
-          },
-          '&.Mui-focusVisible': {
-            backgroundColor: 'rgba(100, 95, 228, 0.32)',
-          },
-          
-        }),
-    );
+    const StyledTab = styled(Tab)({
+        // textTransform: 'none',
+        // minWidth: 100,
+        // fontWeight: 'bold',
+        // marginRight: '20px',
+        // color: '#555',
+        // '&.Mui-selected': {
+        //   color: '#1976d2',
+        // },
+        // '&.Mui-focusVisible': {
+        //   backgroundColor: 'rgba(100, 95, 228, 0.32)',
+        // },
+        textTransform: 'none',
+        fontWeight: theme.typography.fontWeightRegular,
+        fontSize: theme.typography.pxToRem(15),
+        marginRight: theme.spacing(1),
+        color: 'rgba(255, 255, 255, 0.7)',
+        '&.Mui-selected': {
+        color: '#fff',
+        },
+        '&.Mui-focusVisible': {
+        backgroundColor: 'rgba(100, 95, 228, 0.32)',
+        },
+      });
 
     function a11yProps(index) {
         return {
@@ -309,22 +316,22 @@ const DragAndDrop = () => {
 
     return (
         <main className="board">
-            <StyledTabs
+            <Tabs
                 value={value}
                 onChange={handleChange}
                 variant="scrollable"
                 scrollButtons={false}
                 aria-label="scrollable auto tabs example"
-                sx={{
-                    [`& .${tabsClasses.scrollButtons}`]: {
-                        '&.Mui-disabled': { opacity: 0.3 },
-                    },
-                }}
+                // sx={{
+                //     [`& .${tabsClasses.scrollButtons}`]: {
+                //         '&.Mui-disabled': { opacity: 0.3 },
+                //     },
+                // }}
                 
             >
-                <StyledTab label="Item One" {...a11yProps(0)} />
-                <StyledTab label="Item Two" {...a11yProps(1)}  />
-            </StyledTabs>
+                <StyledTab label="My Tasks" {...a11yProps(1)} iconPosition="start"  icon={<Person/>} />
+                <StyledTab label="Team Tasks" {...a11yProps(0)} iconPosition="start"  icon={<Groups/>}/>
+            </Tabs>
             <TabPanel value={value} index={0}>
                 <Grid container spacing={2} direction="column" >
                     <Grid container item spacing={2} direction="row" justifyContent= 'space-between'>

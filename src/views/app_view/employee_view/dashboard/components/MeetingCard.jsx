@@ -1,6 +1,7 @@
-import { Badge, Box, Card, Stack, Typography, alpha, styled, useTheme } from '@mui/material'
+import { Badge, Box, Card, Stack, Typography, alpha, keyframes, styled, useTheme } from '@mui/material'
 import React from 'react'
 import FolderIcon from '@mui/icons-material/Folder';
+import { Videocam } from '@mui/icons-material';
 
 const MeetingCard = (props) => {
 
@@ -11,13 +12,13 @@ const MeetingCard = (props) => {
         // maxWidth: '345px',
         // minHeight: '200px',
         // backgroundColor: 'red',
-        backgroundColor: isStarted ? alpha('rgb(255, 0, 0)', 0.2) : '#09090b8c',
+        backgroundColor: isStarted ? alpha('rgb(255, 0, 0)', 0.2) : alpha('rgb(0, 29, 255)', 0.2),
         // background: '#09090b8c',
         borderRadius: '15px',
         boxShadow: 'none',
         // transition: 'all ease-in 2s',
         padding: '12px',
-        border: isStarted ? '1px #b35555 solid' : ''
+        // border: isStarted ? '1px #b35555 solid' : ''
         // '&:hover':{
         //     // transform: 'scale(1.05)',
         //     background: 'linear-gradient(to top, #396afc, #2948ff);',
@@ -26,12 +27,20 @@ const MeetingCard = (props) => {
 
     const StyledBadge = styled(Badge)(({ theme }) => ({
         '& .MuiBadge-badge': {
-          right: 5,
-          top: 5,
+        //   right: 5,
+        //   top: 5,
         //   border: `7px solid ${theme.palette.background.paper}`,
         //   padding: '0 4px',
         },
     }));
+
+    const pulseAnimation = keyframes`
+    0% {
+        box-shadow: 0 0 0 0px rgba(255, 58, 58, 0.2);
+    }
+    100% {
+        box-shadow: 0 0 0 20px rgba(0, 0, 0, 0);
+    }`;
         
     return (
         <InnerStyledCard>
@@ -42,26 +51,28 @@ const MeetingCard = (props) => {
                 </Box>
                 {
                     isStarted ? 
-                    <StyledBadge variant="dot" overlap="rectangular" color="error" badgeContent=" ">
+                    // <StyledBadge variant="dot" overlap="circular" color="error" badgeContent=" ">
                         <Box 
                             sx={{
                                 height: '100%',
-                                backgroundColor: alpha(theme.palette.primary.main, 0.3),
+                                backgroundColor: alpha('rgb(255, 58, 58)', 0.2),
                                 display: 'flex',
                                 flexDirection: 'column',
                                 alignItems: 'center',
                                 justifyContent: 'center',
                                 borderRadius: '50%',
                                 padding: '15px',
+                                animation: `${pulseAnimation} 1s infinite`
                             }}
                         >
-                            <FolderIcon fontSize='19px' />
+                            <Videocam fontSize='21px' />
                         </Box>
-                    </StyledBadge> :
+                    // </StyledBadge>
+                    :
                     <Box 
                         sx={{
                             height: '100%',
-                            backgroundColor: alpha(theme.palette.primary.main, 0.3),
+                            backgroundColor: alpha(theme.palette.common?.white, 0.2),
                             display: 'flex',
                             flexDirection: 'column',
                             alignItems: 'center',
@@ -70,7 +81,7 @@ const MeetingCard = (props) => {
                             padding: '15px',
                         }}
                     >
-                        <FolderIcon fontSize='19px' />
+                        <Videocam fontSize='21px' />
                     </Box>
                 }
                 

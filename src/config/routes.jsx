@@ -6,6 +6,7 @@ import AppView from "../views/app_view";
 import Login from "../views/auth_view/login_v2";
 import TaskList from "../views/app_view/employee_view/Tasks/TaskList";
 import KanbanBoard from "../views/app_view/employee_view/Tasks/KanbanBoard";
+import Projects from "../views/app_view/employee_view/projects";
 
 export const router = createBrowserRouter([
     { 
@@ -65,6 +66,11 @@ export const router = createBrowserRouter([
         //   Component: Tasks,
         //   title: 'My Tasks'
         // },
+        {
+          path: "/app/projects",
+          Component: Projects,
+          title: 'Projects',
+        },
         {
           path: "/app/profile",
           Component: Profile,
