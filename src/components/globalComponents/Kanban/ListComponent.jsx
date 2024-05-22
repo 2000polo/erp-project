@@ -89,16 +89,19 @@ const ListComponent = (props) => {
     console.log("cards", props?.task)
 
     return (
-        <Stack direction={'column'}> 
-            <Stack spacing={1} direction={'row'} justifyContent={'space-between'} alignItems={'center'}>
-                <Typography align='center' height={24} color={alpha(theme.palette.text.primary, 0.8)} variant="h6">
-                    {title}
-                </Typography>
-                <IconButton color={alpha(theme.palette.text.primary, 0.8)} aria-label="search task">
-                    <SearchOutlined sx={{color: alpha(theme.palette.text.primary, 0.8), fontSize: '1rem' }}/>
-                </IconButton>
-            </Stack>
-            <Divider sx={{mb: 2, mt: .5}} />
+        <Stack spacing={1} direction={'column'}> 
+            <StyledCard> 
+                <Stack spacing={1} direction={'row'} justifyContent={'space-between'} alignItems={'center'}>
+                    <Typography align='center' height={24} color={alpha(theme.palette.text.primary, 0.8)} variant="h6">
+                        {title}
+                    </Typography>
+                    <IconButton color={alpha(theme.palette.text.primary, 0.8)} aria-label="search task">
+                        <SearchOutlined sx={{color: alpha(theme.palette.text.primary, 0.8), fontSize: '1rem' }}/>
+                    </IconButton>
+                </Stack>
+            </StyledCard>
+            
+            {/* <Divider sx={{mb: 2, mt: .5}} /> */}
             <div
                 className={`column`}
                 data-column={state}
