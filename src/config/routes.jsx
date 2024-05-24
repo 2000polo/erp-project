@@ -7,6 +7,7 @@ import Login from "../views/auth_view/login_v2";
 import TaskList from "../views/app_view/employee_view/Tasks/TaskList";
 import KanbanBoard from "../views/app_view/employee_view/Tasks/KanbanBoard";
 import Projects from "../views/app_view/employee_view/projects";
+import Tasks from "../views/app_view/employee_view/Tasks";
 
 export const router = createBrowserRouter([
     { 
@@ -29,20 +30,20 @@ export const router = createBrowserRouter([
         },
         {
           path: "/app/tasks",
-          // Component: Tasks,
+          Component: Tasks,
           title: 'Tasks',
-          children: [
-            {
-              path: "/app/tasks/task-list",
-              Component: TaskList,
-              title: 'Task List'
-            },
-            {
-              path: "/app/tasks/kanban-board",
-              Component: KanbanBoard,
-              title: 'Kanban Board'
-            },
-          ]
+          // children: [
+          //   {
+          //     path: "/app/tasks/task-list",
+          //     Component: TaskList,
+          //     title: 'Task List'
+          //   },
+          //   {
+          //     path: "/app/tasks/kanban-board",
+          //     Component: KanbanBoard,
+          //     title: 'Kanban Board'
+          //   },
+          // ]
         },
         // {
         //   path: "/app/tasks",

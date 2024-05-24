@@ -16,7 +16,8 @@ const Schedules = () => {
         boxShadow: '2px 2px 4px rgba(0, 0, 0, 0.2)',
         // transition: 'all ease-in 2s',
         padding: '12px',
-
+        // maxHeight: '250px',
+        // overflowY: 'scroll'
         // '&:hover':{
         //     // transform: 'scale(1.05)',
         //     background: 'linear-gradient(to top, #396afc, #2948ff);',

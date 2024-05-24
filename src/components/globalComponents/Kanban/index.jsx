@@ -316,23 +316,6 @@ const DragAndDrop = () => {
 
     return (
         <main className="board">
-            <Tabs
-                value={value}
-                onChange={handleChange}
-                variant="scrollable"
-                scrollButtons={false}
-                aria-label="scrollable auto tabs example"
-                // sx={{
-                //     [`& .${tabsClasses.scrollButtons}`]: {
-                //         '&.Mui-disabled': { opacity: 0.3 },
-                //     },
-                // }}
-                
-            >
-                <StyledTab label="My Tasks" {...a11yProps(1)} iconPosition="start"  icon={<Person/>} />
-                <StyledTab label="Team Tasks" {...a11yProps(0)} iconPosition="start"  icon={<Groups/>}/>
-            </Tabs>
-            <TabPanel value={value} index={0}>
                 <Grid container spacing={2} direction="column" >
                     <Grid container item spacing={2} direction="row" justifyContent= 'space-between'>
                         <Grid item xs={3} >
@@ -349,7 +332,6 @@ const DragAndDrop = () => {
                         </Grid>
                     </Grid>
                 </Grid>
-            </TabPanel>
         </main>
     )
 }

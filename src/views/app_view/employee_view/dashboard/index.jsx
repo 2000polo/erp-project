@@ -7,6 +7,7 @@ import AddPorjectCard from './components/AddPorjectCard';
 import Schedules from './components/Schedules';
 import TaskOverview from './components/TaskOverview';
 import MeetingsNotifications from './components/MeetingsNotifications';
+import PrevDayUpdates from './components/PrevDayUpdates';
 
 const Dashboard = () => {
 
@@ -42,8 +43,9 @@ const Dashboard = () => {
 
     return (
         <>
-        <Grid container spacing={2} direction="column" >
-            <Grid container item spacing={2} direction="row" justifyContent= 'space-between'>
+        <Grid container spacing={2} direction="row" >
+            {/* <Grid container item spacing={2} direction="row" justifyContent= 'space-between'> */}
+            <>
                 {
                     projectStatus?.map((project) => {
                         return (
@@ -60,27 +62,40 @@ const Dashboard = () => {
                     </Grid> :
                     ''
                 }
-            </Grid>
-            <Grid container item spacing={2} direction="row" justifyContent= 'space-between'>
+            </>
+                
+            {/* </Grid> */}
+            <Grid container item spacing={2} direction="row">
                 {/* <Grid item xs={9}>
                     <TaskOverview />
                 </Grid> */}
-                <Grid item xs={9}>
-                    <TaskOverview />
-                </Grid>
-                
-                <Grid xs={3} container item  direction="row" justifyContent= 'space-between'>
-                    
-                    <Stack spacing={2}>
+                <Grid xs={9} container item spacing={2} direction="row">
+                    <Grid item xs={4}>
                         <MeetingsNotifications />
+                    </Grid>
+                    <Grid item xs={4}>
+                        <MeetingsNotifications />
+                    </Grid>
+                    {/* <Grid item xs={4}>
                         <Schedules />
-                    </Stack>{/* <Grid item xs={12}> */}
-                    {/* </Grid> */}
-                    {/* <Grid item xs={12}> */}
-                    {/* </Grid> */}
+                    </Grid> */}
+                    <Grid item xs={12}>
+                        <TaskOverview />
+                    </Grid>
+                </Grid>
+                <Grid item xs={3}>
+                    <Stack spacing={2}>
+                        <PrevDayUpdates />
+                        <Schedules />
+                    </Stack>
+                </Grid>
+                <Grid item xs={3}>
                 </Grid>
             </Grid>
-            
+            {/* <Grid container item spacing={2} direction="row" justifyContent= 'space-between'> */}
+                
+                
+            {/* </Grid> */}
             
         </Grid>
         </>

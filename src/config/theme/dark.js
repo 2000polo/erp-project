@@ -8,7 +8,7 @@ export const darkTheme = createTheme({
       main: '#27272a', // Customize the primary color for dark theme
     },
     secondary: {
-      main: pink[300], // Customize the secondary color for dark theme
+      main: blue[900], // Customize the secondary color for dark theme
     },
     background: {
       // default: '#191D29', // Customize the default background color for dark theme
