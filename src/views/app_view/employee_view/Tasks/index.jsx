@@ -12,7 +12,7 @@ const Tasks = () => {
     const theme = useTheme();
 
     const [value, setValue] = React.useState(0);
-    const [view, setView] = React.useState('list');
+    const [view, setView] = React.useState('table');
 
     const handleViewChange = (event, nextView) => {
       setView(nextView);
@@ -46,9 +46,6 @@ const Tasks = () => {
         borderRadius: '10px',
         boxShadow: '2px 2px 4px rgba(0, 0, 0, 0.2)',
         padding: '12px',
-        //     // transform: 'scale(1.05)',
-        //     background: 'linear-gradient(to top, #396afc, #2948ff);',
-        // }
     })
 
     function a11yProps(index) {
@@ -149,6 +146,7 @@ const Tasks = () => {
 
     return (
         <>
+            {/* Header */}
             <Stack direction={'row'} justifyContent={'space-between'} alignItems={'center'}>
                 <Box>
                     <Tabs
@@ -157,12 +155,6 @@ const Tasks = () => {
                         variant="scrollable"
                         scrollButtons={false}
                         aria-label="scrollable auto tabs example"
-                        // sx={{
-                        //     [`& .${tabsClasses.scrollButtons}`]: {
-                        //         '&.Mui-disabled': { opacity: 0.3 },
-                        //     },
-                        // }}
-                        
                     >
                         <StyledTab label="My Tasks" {...a11yProps(1)} iconPosition="start"  icon={<Person/>} />
                         <StyledTab label="Team Tasks" {...a11yProps(0)} iconPosition="start"  icon={<Groups/>}/>
@@ -171,15 +163,6 @@ const Tasks = () => {
 
                 <Box >
                     <Stack direction={'row'} spacing={1}>
-                        {/* <Search>
-                            <SearchIconWrapper>
-                                <SearchIcon />
-                            </SearchIconWrapper>
-                            <StyledInputBase
-                                placeholder="Search…"
-                                inputProps={{ 'aria-label': 'search' }}
-                            />
-                        </Search> */}
                         <ToggleButtonGroup
                             orientation="horizontal"
                             value={view}
@@ -193,58 +176,57 @@ const Tasks = () => {
                             <ToggleButton value="kanban" aria-label="kanban">
                                 <ViewWeek />
                             </ToggleButton>
-                            
-                            {/* <ToggleButton value="quilt" aria-label="quilt">
-                                <ViewQuiltIcon />
-                            </ToggleButton> */}
                         </ToggleButtonGroup>
-                        {/* <Button
-                            component="label"
-                            role={undefined}
-                            variant="contained"
-                            tabIndex={-1}
-                            startIcon={<Add />}
-                            sx={{bgcolor: blue[900]}}
-                        >
-                            Add Project
-                            <VisuallyHiddenInput type="file" />
-                        </Button> */}
                         <AddTaskForm />
                     </Stack>
                 </Box>
             </Stack>
             
-
+            {/* Tabs and page contents */}
             <Box sx={{ marginTop: '16px'}}>
-                
                 <TabPanel value={value} index={0}>
-                    <Kanban />
+                    {
+                        view === 'table' ?
+                        <StyledCard>
+                            <Box sx={{ height: 800, width: '100%' }}>
+                                <StyledDataGrid 
+                                    rows={rows}
+                                    columns={columns}
+                                    initialState={{
+                                    pagination: {
+                                        paginationModel: { page: 0, pageSize: 15 },
+                                    },
+                                    }}
+                                    pageSizeOptions={[5, 10]}
+                                    // checkboxSelection
+                                />
+                            </Box>
+                        </StyledCard> :
+                        <Kanban />
+                    }
                 </TabPanel>
                 <TabPanel value={value} index={1}>
-                    <StyledCard>
-                        {/* <Typography variant="h6">
-                            Your Tasks
-                        </Typography> */}
-                        <Box sx={{ height: 850, width: '100%' }}>
-                            <StyledDataGrid 
-                                rows={rows}
-                                columns={columns}
-                                initialState={{
-                                pagination: {
-                                    paginationModel: { page: 0, pageSize: 15 },
-                                },
-                                }}
-                                pageSizeOptions={[5, 10]}
-                                // checkboxSelection
-                            />
-                        </Box>
-                    </StyledCard>
+                    {
+                        view === 'table' ?
+                        <StyledCard>
+                            <Box sx={{ height: 800, width: '100%' }}>
+                                <StyledDataGrid 
+                                    rows={rows}
+                                    columns={columns}
+                                    initialState={{
+                                    pagination: {
+                                        paginationModel: { page: 0, pageSize: 15 },
+                                    },
+                                    }}
+                                    pageSizeOptions={[5, 10]}
+                                    // checkboxSelection
+                                />
+                            </Box>
+                        </StyledCard> :
+                        <Kanban />
+                    }
                 </TabPanel>
             </Box>
-        {/* 
-            <Fab sx={fabStyle} color="primary" aria-label="add">
-                <Add />
-            </Fab> */}
         </>
     )
 }
