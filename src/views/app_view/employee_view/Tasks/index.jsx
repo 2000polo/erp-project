@@ -4,7 +4,8 @@ import { Box, Card, Chip, Fab, Stack, Tab, Tabs, ToggleButton, ToggleButtonGroup
 import { Groups, Person, Add, Search, ViewWeek, TableRows } from '@mui/icons-material';
 import { DataGrid } from '@mui/x-data-grid';
 import { blue } from '@mui/material/colors';
-import AddProjectForm from '../../../../components/globalComponents/forms/AddProjectForm';
+import AddTaskForm from '../../../../components/globalComponents/forms/AddTaskForm';
+import { useSelector } from 'react-redux';
 
 const Tasks = () => {
 
@@ -136,6 +137,8 @@ const Tasks = () => {
         { id: 9, category: 'Bug', assignee: 'Harvey', age: 65, task: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa molestias itaque molestiae deleniti quis fugit expedita tempore culpa rerum, voluptatem dicta vitae, necessitatibus aliquid unde, velit fugiat id dignissimos. Itaque." },
     ];
 
+    console.log('tasks from redux store', useSelector(state => state?.tasks?.tasks))
+
     const fabStyle = {
         position: 'absolute',
         bottom: 26,
@@ -206,7 +209,7 @@ const Tasks = () => {
                             Add Project
                             <VisuallyHiddenInput type="file" />
                         </Button> */}
-                        <AddProjectForm />
+                        <AddTaskForm />
                     </Stack>
                 </Box>
             </Stack>
