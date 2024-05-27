@@ -2,6 +2,7 @@ import { Badge, Box, Card, Stack, Typography, alpha, keyframes, styled, useTheme
 import React from 'react'
 import FolderIcon from '@mui/icons-material/Folder';
 import { Videocam } from '@mui/icons-material';
+import { blue } from '@mui/material/colors';
 
 const MeetingCard = (props) => {
 
@@ -12,7 +13,7 @@ const MeetingCard = (props) => {
         // maxWidth: '345px',
         // minHeight: '200px',
         // backgroundColor: 'red',
-        backgroundColor: isStarted ? alpha('rgb(255, 0, 0)', 0.2) : alpha('rgb(0, 29, 255)', 0.2),
+        backgroundColor: isStarted ? alpha('rgb(255, 0, 0)', 0.2) : blue[900],
         // background: '#09090b8c',
         borderRadius: '15px',
         boxShadow: 'none',
