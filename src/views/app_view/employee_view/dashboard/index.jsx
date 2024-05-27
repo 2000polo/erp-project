@@ -8,6 +8,7 @@ import Schedules from './components/Schedules';
 import TaskOverview from './components/TaskOverview';
 import MeetingsNotifications from './components/MeetingsNotifications';
 import PrevDayUpdates from './components/PrevDayUpdates';
+import CurrentTask from './components/CurrentTask';
 
 const Dashboard = () => {
 
@@ -71,22 +72,26 @@ const Dashboard = () => {
                 </Grid> */}
                 <Grid xs={9} container item spacing={2} direction="row">
                     <Grid item xs={4}>
-                        <MeetingsNotifications />
+                        <CurrentTask />
                     </Grid>
                     <Grid item xs={4}>
                         <MeetingsNotifications />
                     </Grid>
+                    <Grid item xs={4}>
+                        <Schedules />
+                    </Grid>
+                    
                     {/* <Grid item xs={4}>
                         <Schedules />
                     </Grid> */}
                     <Grid item xs={12}>
-                        <TaskOverview />
+                        {/* <TaskOverview /> */}
                     </Grid>
                 </Grid>
                 <Grid item xs={3}>
                     <Stack spacing={2}>
                         <PrevDayUpdates />
-                        <Schedules />
+                        {/* <Schedules /> */}
                     </Stack>
                 </Grid>
                 <Grid item xs={3}>
