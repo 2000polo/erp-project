@@ -39,7 +39,17 @@ const AddProjectForm = () => {
         setOpen(false);
     };
 
-    
+    // Project Name
+    // Project Logo
+    // Assigned Team
+    // Client Name
+    // Project Manager
+    // Duration - start date end date
+    // Project Description
+    // Technologies Used
+    // Phases
+
+
     return (
         <React.Fragment>
             <Button
@@ -59,6 +69,7 @@ const AddProjectForm = () => {
                 keepMounted
                 onClose={handleClose}
                 aria-describedby="alert-dialog-slide-description"
+                maxWidth='md'
             >
                 <DialogTitle>{"Add New Project"}</DialogTitle>
                 <DialogContent>
@@ -66,6 +77,7 @@ const AddProjectForm = () => {
                         Let Google help apps determine location. This means sending anonymous
                         location data to Google, even when no apps are running.
                     </DialogContentText>
+
                     <AddProject />
                 </DialogContent>
             </GlassDialog>
