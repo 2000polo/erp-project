@@ -6,12 +6,14 @@ import React from 'react'
 import SearchIcon from '@mui/icons-material/Search';
 import MainProjectCard from './MainProjectCard';
 import AddProjectForm from '../../../../components/globalComponents/forms/AddProjectForm';
+import { useSelector } from 'react-redux';
 
 const Projects = () => {
 
     const theme = useTheme();
-
     const [value, setValue] = React.useState(0);
+
+    const projects = useSelector((state) => state.projects.projectList)
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -123,99 +125,7 @@ const Projects = () => {
         },
     }));
 
-    const projectStatus = [
-        {
-            project_name: 'Project Name',
-            desc: 'To be deliverd in 120 days',
-            percentage_completion: 50,
-            project_status: 'In Porgress'
-        },
-        {
-            project_name: 'Project Name',
-            desc: 'To be deliverd in 120 days',
-            percentage_completion: 50,
-            project_status: 'In Porgress'
-        },
-        {
-            project_name: 'Project Name',
-            desc: 'To be deliverd in 120 days',
-            percentage_completion: 50,
-            project_status: 'In Porgress'
-        },
-        {
-            project_name: 'Project Name',
-            desc: 'To be deliverd in 120 days',
-            percentage_completion: 50,
-            project_status: 'In Porgress'
-        },
-        {
-            project_name: 'Project Name',
-            desc: 'To be deliverd in 120 days',
-            percentage_completion: 50,
-            project_status: 'In Porgress'
-        },
-        {
-            project_name: 'Project Name',
-            desc: 'To be deliverd in 120 days',
-            percentage_completion: 50,
-            project_status: 'In Porgress'
-        },
-        {
-            project_name: 'Project Name',
-            desc: 'To be deliverd in 120 days',
-            percentage_completion: 50,
-            project_status: 'In Porgress'
-        },
-        {
-            project_name: 'Project Name',
-            desc: 'To be deliverd in 120 days',
-            percentage_completion: 50,
-            project_status: 'In Porgress'
-        },
-        {
-            project_name: 'Project Name',
-            desc: 'To be deliverd in 120 days',
-            percentage_completion: 50,
-            project_status: 'In Porgress'
-        },
-        {
-            project_name: 'Project Name',
-            desc: 'To be deliverd in 120 days',
-            percentage_completion: 50,
-            project_status: 'In Porgress'
-        },
-        {
-            project_name: 'Project Name',
-            desc: 'To be deliverd in 120 days',
-            percentage_completion: 50,
-            project_status: 'In Porgress'
-        },
-        {
-            project_name: 'Project Name',
-            desc: 'To be deliverd in 120 days',
-            percentage_completion: 50,
-            project_status: 'In Porgress'
-        },
-        {
-            project_name: 'Project Name',
-            desc: 'To be deliverd in 120 days',
-            percentage_completion: 50,
-            project_status: 'In Porgress'
-        },
-        {
-            project_name: 'Project Name',
-            desc: 'To be deliverd in 120 days',
-            percentage_completion: 50,
-            project_status: 'In Porgress'
-        },
-        // {
-        //     project_name: 'Project Name',
-        //     desc: 'To be deliverd in 120 days',
-        //     percentage_completion: 50,
-        //     project_status: 'In Porgress'
-        // },
-    ];
-
+    console.log('project list from store', projects)
     return (
         <>
             <Stack direction={'row'} justifyContent={'space-between'} alignItems={'center'}>
@@ -270,7 +180,7 @@ const Projects = () => {
             <Box sx={{ marginTop: '16px'}}> 
                 <Grid container item spacing={2} direction="row">
                     {
-                        projectStatus?.map((project) => {
+                        projects?.map((project) => {
                             return (
                                 <Grid item xs={3}>
                                     <MainProjectCard data={project} />
