@@ -44,10 +44,13 @@ export const taskSlice = createSlice({
     incrementByAmount: (state, action) => {
       state.value += action.payload
     },
+    addNewTask: (state, action) => {
+      console.log("Add New Task Reducer", state, action)
+    }
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { increment, decrement, incrementByAmount } = taskSlice.actions
+export const { increment, decrement, incrementByAmount, addNewTask } = taskSlice.actions
 
 export default taskSlice.reducer

@@ -6,16 +6,20 @@ import { DataGrid } from '@mui/x-data-grid';
 import { blue } from '@mui/material/colors';
 import AddTaskForm from '../../../../components/globalComponents/forms/AddTaskForm';
 import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { addNewTask } from '../../../../app/tasks/taskSlice';
 
 const Tasks = () => {
 
     const theme = useTheme();
+    const dispatch = useDispatch();
 
     const [value, setValue] = React.useState(0);
     const [view, setView] = React.useState('table');
 
     const handleViewChange = (event, nextView) => {
       setView(nextView);
+      dispatch(addNewTask('action'));
     };
 
     const handleChange = (event, newValue) => {
@@ -142,6 +146,7 @@ const Tasks = () => {
         right: 26,
         bgcolor: blue[900],
     };
+
 
 
     return (
