@@ -8,7 +8,7 @@ const MeetingsNotifications = () => {
 
     const StyledCard = styled(Card)({
         // maxWidth: '345px',
-        // minHeight: '200px',
+        // maxHeight: '200px',
         backgroundColor: theme.palette.background.default,
         // background: 'linear-gradient(to top, #396afc, #2948ff);',
         borderRadius: '10px',

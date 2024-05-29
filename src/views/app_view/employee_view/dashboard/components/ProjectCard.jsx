@@ -1,6 +1,7 @@
 import { DriveFolderUpload, FileOpenOutlined, More } from '@mui/icons-material';
 import FolderIcon from '@mui/icons-material/Folder';
 import { Avatar, AvatarGroup, Box, Card, CardActionArea, Grid, LinearProgress, Paper, Stack, Typography, alpha, linearProgressClasses, styled, useTheme } from '@mui/material';
+import { blue } from '@mui/material/colors';
 import React from 'react';
 
 const ProjectCard = () => {
@@ -123,13 +124,14 @@ const ProjectCard = () => {
                                 height: '100%',
                                 // backgroundColor: 'primary.dark',
                                 // '&:hover': {
-                                backgroundColor: alpha(theme.palette.primary.main, 0.3),
+                                backgroundColor: blue[900],
                                 // opacity: [0.2, 0.5, 0.5],
                                 display: 'flex',
                                 flexDirection: 'column',
                                 alignItems: 'center',
                                 justifyContent: 'center',
-                                borderRadius: '5px'
+                                borderRadius: '5px',
+                                boxShadow: '0px 0px 124px rgb(13 71 161)'
                                 // },
                             }}
                         >
