@@ -9,7 +9,7 @@ const ImageUpload = () => {
 
     const StyledCard = styled(Card)({
         // maxWidth: '345px',
-        // minHeight: '129px',
+        height: '100%',
         backgroundColor: theme.palette.background.default,
         // background: 'linear-gradient(to top, #396afc, #2948ff);',
         borderRadius: '10px',
@@ -25,14 +25,14 @@ const ImageUpload = () => {
 
     const DottedCard = styled(Card)({
         // maxWidth: '345px',
-        minHeight: '107px',
+        height: '100%',
         backgroundColor: theme.palette.background.default,
         // background: 'linear-gradient(to top, #396afc, #2948ff);',
         borderRadius: '10px',
         boxShadow: '2px 2px 4px rgba(0, 0, 0, 0.2)',
         // transition: 'all ease-in 2s',
         padding: '12px',
-        border: '2px dashed #cacaca',
+        border: '2px dashed #cacaca !important',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -44,7 +44,7 @@ const ImageUpload = () => {
     })
         
     return (
-        <CardActionArea>
+        <CardActionArea style={{height: '100%'}} >
             <StyledCard>
                 <DottedCard>
                     <Box 
