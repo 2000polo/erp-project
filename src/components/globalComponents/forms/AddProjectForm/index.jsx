@@ -78,7 +78,7 @@ const AddProjectForm = () => {
                         location data to Google, even when no apps are running.
                     </DialogContentText>
 
-                    <AddProject />
+                    <AddProject handleClose={handleClose} />
                 </DialogContent>
             </GlassDialog>
         </React.Fragment>

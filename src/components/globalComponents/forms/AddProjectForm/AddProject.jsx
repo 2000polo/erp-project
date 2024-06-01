@@ -1,10 +1,14 @@
-import { Autocomplete, Box, Button, FormControl, Grid, InputLabel, MenuItem, Select, Stack, TextField, styled, useTheme } from '@mui/material'
-import { blue } from '@mui/material/colors';
 import React, { useState } from 'react'
-import ImageUpload from '../../ImageUpload';
-import { DateField } from '@mui/x-date-pickers/DateField';
+import { Autocomplete, Box, Button, FormControl, Grid, InputLabel, MenuItem, Select, Stack, TextField, styled, useTheme } from '@mui/material'
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+// Colors import
+import { blue } from '@mui/material/colors';
+// Internal components import
+import ImageUpload from '../../ImageUpload';
+// redux imports
+import { useDispatch } from 'react-redux';
+import { adddNewProject } from '../../../../app/projects/projectSlice';
 import dayjs from 'dayjs';
 
 const FormContainer = styled(Box)({
@@ -12,11 +16,9 @@ const FormContainer = styled(Box)({
     flexDirection: 'column',
     gap: '16px',
     padding: '24px 0px',
-    // maxWidth: '400px',
     margin: 'auto',
     boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
     borderRadius: '8px',
-    // backgroundColor: '#fff',
 });
 
 const CustomTextField = styled(TextField)({
@@ -28,11 +30,10 @@ const CustomTextField = styled(TextField)({
     },
 });
 
-
-
-const AddProject = () => {
+const AddProject = (props) => {
 
     const theme = useTheme();
+    const dispatch = useDispatch();
     
     const [formValues, setFormValues] = useState({
         projectName: '',
@@ -59,7 +60,23 @@ const AddProject = () => {
         e.preventDefault();
         // Handle form submission logic here
         console.log(formValues);
+
+        if(dispatch){
+            dispatch(adddNewProject(
+                {
+                    project_name: formValues?.projectName,
+                    desc: formValues.description,
+                    percentage_completion: 0,
+                    project_status: formValues.status,
+                    client_name: formValues.clientName,
+                    project_status: formValues?.status,
+                }
+            ));
+        }
+
+        props?.handleClose(true)
     };
+
 
     return (
         <FormContainer>
@@ -95,12 +112,20 @@ const AddProject = () => {
                     </Grid>
                     <Grid item xs={4}>
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
-                            <DatePicker label="Start Date" />
+                            <DatePicker
+                            name="start_date"
+                            // value={dayjs(formValues.start_date)}
+                            onChange={handleInputChange}
+                            label="Start Date" />
                         </LocalizationProvider>
                     </Grid>
                     <Grid item xs={4}>
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
-                            <DatePicker label="Delivery Date" />
+                            <DatePicker
+                            name="end_date"
+                            // value={dayjs(formValues.end_date)}
+                            onChange={handleInputChange}
+                            label="Delivery Date" />
                         </LocalizationProvider>
                     </Grid>
                     <Grid item xs={4}>
@@ -115,13 +140,27 @@ const AddProject = () => {
                             id={'status'}
                             select
                         >
-                            <MenuItem value="Critical">Critical</MenuItem>
-                            <MenuItem value="High">High</MenuItem>
-                            <MenuItem value="Medium">Medium</MenuItem>
-                            <MenuItem value="Low">Low</MenuItem>
+                            <MenuItem value="In Progress">In Progress</MenuItem>
+                            <MenuItem value="Not Started">Not Started</MenuItem>
+                            <MenuItem value="Completed">Completed</MenuItem>
+                            <MenuItem value="Halted">Halted</MenuItem>
                         </CustomTextField>
                     </Grid>
                     
+                </Grid>
+                <Grid item xs={12}>
+                    <CustomTextField
+                        // color={'red'}
+                        focused
+                        label="Description"
+                        name="description"
+                        value={formValues.description}
+                        onChange={handleInputChange}
+                        multiline
+                        rows={4}
+                        fullWidth
+                        required
+                    />
                 </Grid>
                 <Grid item xs={6}>
                     <CustomTextField
@@ -135,6 +174,7 @@ const AddProject = () => {
                         required
                     />
                 </Grid>
+                
                 <Grid item xs={6}>
                     <Autocomplete
                         multiple
@@ -154,18 +194,6 @@ const AddProject = () => {
                 </Grid>
             </Grid>
             
-            <CustomTextField
-                // color={'red'}
-                focused
-                label="Description"
-                name="description"
-                value={formValues.description}
-                onChange={handleInputChange}
-                multiline
-                rows={4}
-                fullWidth
-                required
-            />
             
             <Button 
                 component="label"
