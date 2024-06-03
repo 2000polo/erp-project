@@ -4,8 +4,11 @@ import { Avatar, AvatarGroup, Box, Card, CardActionArea, CardMedia, Grid, Linear
 import { blue } from '@mui/material/colors';
 import React from 'react';
 
-const MainProjectCard = () => {
+const MainProjectCard = (props) => {
+
     const theme = useTheme();
+    
+    const { project_name, desc, percentage_completion, project_status } = props.data
 
     const StyledCard = styled(Card)({
         // maxWidth: '345px',
@@ -60,44 +63,6 @@ const MainProjectCard = () => {
     }));
 
     return (
-        // <StyledCard variant='outlined'>
-        //     <Stack direction='column' justifyContent='space-between'>
-        //         <Stack direction='row' justifyContent='space-between' alignItems='center'>
-                    // <Typography variant="h5">
-                    //     Project Name
-                    // </Typography>
-        //             <More fontSize="small" />
-        //         </Stack>
-
-        //         <Stack>
-        //             <Typography color={alpha(theme.palette.text.primary, 0.7)} variant="caption" display="block" gutterBottom>
-        //                 Expected delivary date on 20-05-2024
-        //             </Typography>
-        //         </Stack>
-
-        //         <Box>
-                    // <Stack direction='row' justifyContent='space-between' alignItems='center' >
-                    //     <Typography color={alpha(theme.palette.text.primary, 0.7)} variant="caption" display="block" gutterBottom>
-                    //         Progress
-                    //     </Typography>
-                    //     <Typography color={alpha(theme.palette.text.primary, 0.7)} variant="caption" display="block" gutterBottom>
-                    //         50%
-                    //     </Typography>
-                    // </Stack>
-        //             <BorderLinearProgress variant="determinate" value={50} />
-        //         </Box>
-
-        //         <Box>
-                    // <StyledAvatarGroup max={4}>
-                    //     <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-                    //     <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" />
-                    //     <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
-                    //     <Avatar alt="Agnes Walker" src="/static/images/avatar/4.jpg" />
-                    //     <Avatar alt="Trevor Henderson" src="/static/images/avatar/5.jpg" />
-                    // </StyledAvatarGroup>
-        //         </Box>
-        //     </Stack>
-        // </StyledCard>
         <CardActionArea>
             <StyledCard>
                 <Grid container spacing={0} >
@@ -117,7 +82,7 @@ const MainProjectCard = () => {
                                 <Grid item xs={10}>
                                     {/* <Item>xs=8</Item> */}
                                     <Typography variant="h6">
-                                        Project Name
+                                        {project_name}
                                     </Typography>
                                     <Typography color={alpha(theme.palette.text.primary, 0.7)} variant="caption" display="block" gutterBottom>
                                         to be deliverd in 120 days
@@ -166,13 +131,13 @@ const MainProjectCard = () => {
                     <Grid item xs={12} pt={1.8}>
                         <Stack direction='row' justifyContent='space-between' alignItems='center' >
                             <Typography color={alpha(theme.palette.text.primary, 0.7)} variant="caption" display="block" gutterBottom>
-                                In Progress
+                                {project_status}
                             </Typography>
                             <Typography color={alpha(theme.palette.text.primary, 0.7)} variant="caption" display="block" gutterBottom>
-                                50%
+                                {percentage_completion}
                             </Typography>
                         </Stack>
-                        <BorderLinearProgress sx={{ bgcolor: blue['900']}} variant="determinate" value={50} />
+                        <BorderLinearProgress sx={{ bgcolor: blue['900']}} variant="determinate" value={percentage_completion} />
                     </Grid>
                 </Grid>
             </StyledCard>
