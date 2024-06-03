@@ -1,6 +1,7 @@
-import { Box, Button, FormControl, InputLabel, MenuItem, Select, TextField, styled, useTheme } from '@mui/material'
+import { Box, Button, FormControl, Grid, InputLabel, MenuItem, Select, Stack, TextField, styled, useTheme } from '@mui/material'
 import { blue } from '@mui/material/colors';
 import React, { useState } from 'react'
+import ImageUpload from '../../ImageUpload';
 
 const AddProject = () => {
 
@@ -48,17 +49,62 @@ const AddProject = () => {
     return (
         <FormContainer>
             {/* <Typography variant="h5">Add New Project</Typography> */}
-            <CustomTextField
-                // color={'red'}
-                focused
-                label="Project Name"
-                name="projectName"
-                value={formValues.projectName}
-                onChange={handleInputChange}
-                fullWidth
-                required
-
-            />
+            <Grid container spacing={2} direction="row" >
+                <Grid item xs={2}>
+                    <ImageUpload />
+                </Grid>
+                <Grid spacing={2} container item xs={10}>
+                    <Grid item xs={6}> 
+                        <CustomTextField
+                            // color={'red'}
+                            focused
+                            label="Project Name"
+                            name="projectName"
+                            value={formValues.projectName}
+                            onChange={handleInputChange}
+                            fullWidth
+                            required
+                        />
+                    </Grid>
+                    <Grid item xs={6}> 
+                        <CustomTextField
+                            // color={'red'}
+                            focused
+                            label="Client"
+                            name="clientName"
+                            value={formValues.clientName}
+                            onChange={handleInputChange}
+                            fullWidth
+                            required
+                        />
+                    </Grid>
+                    <Grid item xs={6}>
+                        <CustomTextField
+                            // color={'red'}
+                            focused
+                            label="Client Website"
+                            name="website"
+                            value={formValues.website}
+                            onChange={handleInputChange}
+                            fullWidth
+                            required
+                        />
+                    </Grid>
+                    <Grid item xs={6}>
+                        <CustomTextField
+                            // color={'red'}
+                            focused
+                            label="Client Website"
+                            name="website"
+                            value={formValues.website}
+                            onChange={handleInputChange}
+                            fullWidth
+                            required
+                        />
+                    </Grid>
+                </Grid>
+            </Grid>
+            
             <CustomTextField
                 // color={'red'}
                 focused
@@ -89,11 +135,12 @@ const AddProject = () => {
                     value={formValues.status}
                     onChange={handleInputChange}
                 >
-                <MenuItem value="Not Started">Not Started</MenuItem>
-                <MenuItem value="In Progress">In Progress</MenuItem>
-                <MenuItem value="Completed">Completed</MenuItem>
+                    <MenuItem value="Not Started">Not Started</MenuItem>
+                    <MenuItem value="In Progress">In Progress</MenuItem>
+                    <MenuItem value="Completed">Completed</MenuItem>
                 </Select>
             </FormControl>
+            
             <Button 
                 component="label"
                 role={undefined}
