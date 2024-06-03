@@ -6,16 +6,22 @@ import { DataGrid } from '@mui/x-data-grid';
 import { blue } from '@mui/material/colors';
 import AddTaskForm from '../../../../components/globalComponents/forms/AddTaskForm';
 import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { addNewTask } from '../../../../app/tasks/taskSlice';
 
 const Tasks = () => {
 
     const theme = useTheme();
+    const dispatch = useDispatch();
+
+    const tasks = useSelector((state) => state?.tasks?.tasks);
 
     const [value, setValue] = React.useState(0);
     const [view, setView] = React.useState('table');
 
     const handleViewChange = (event, nextView) => {
       setView(nextView);
+      dispatch(addNewTask('action'));
     };
 
     const handleChange = (event, newValue) => {
@@ -74,14 +80,14 @@ const Tasks = () => {
         { field: 'id', headerName: 'ID', 
         width: 70 },
         {
-            field: 'task',
+            field: 'description',
             headerName: 'Task',
             description: 'This column has a value getter and is not sortable.',
             sortable: false,
             width: 900,
             // valueGetter: (value, row) => `${row.assignee || ''} ${row.lastName || ''}`,
         },
-        { field: 'category', headerName: 'Category', 
+        { field: 'taskCategroy', headerName: 'Category', 
             width: 120 
         },
         { field: 'assignee', headerName: 'Assignee', 
@@ -93,45 +99,28 @@ const Tasks = () => {
             width: 120,
             renderCell: (params) => (
                 <Stack direction={'row'} alignItems={'center'} sx={{height: '100%'}} spacing={1}>
-                    <Chip size='small' label="high" color="error" />
+                    <Chip size='small' label={params?.formattedValue} color="error" />
                 </Stack>
             ),
         },
         { 
-            field: 'label', 
+            field: 'labels', 
             headerName: 'Label', 
-            width: 200,
+            width: 260,
             renderCell: (params) => (
                 <Stack direction={'row'} alignItems={'center'} sx={{height: '100%'}} spacing={1}>
-                    <Chip size='small' label="primary" color="info" />
-                    <Chip size='small' label="success" color="success" />
+                    {
+                        // console.log(params)
+                        params?.formattedValue?.map((label) => {
+                            return (
+                                <Chip size='small' label={label?.value} color="info" />
+                            )
+                        })
+                    }
+                    
                 </Stack>
             ),
         },
-    ];
-      
-    const rows = [
-        { id: 1, category: 'Bug', assignee: 'Jon', age: 35, task: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa molestias itaque molestiae deleniti quis fugit expedita tempore culpa rerum, voluptatem dicta vitae, necessitatibus aliquid unde, velit fugiat id dignissimos. Itaque." },
-        { id: 2, category: 'Feature', assignee: 'Cersei', age: 42, task: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa molestias itaque molestiae deleniti quis fugit expedita tempore culpa rerum, voluptatem dicta vitae, necessitatibus aliquid unde, velit fugiat id dignissimos. Itaque." },
-        { id: 3, category: 'Feature', assignee: 'Jaime', age: 45, task: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa molestias itaque molestiae deleniti quis fugit expedita tempore culpa rerum, voluptatem dicta vitae, necessitatibus aliquid unde, velit fugiat id dignissimos. Itaque." },
-        { id: 4, category: 'Feature', assignee: 'Arya', age: 16, task: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa molestias itaque molestiae deleniti quis fugit expedita tempore culpa rerum, voluptatem dicta vitae, necessitatibus aliquid unde, velit fugiat id dignissimos. Itaque." },
-        { id: 5, category: 'Feature', assignee: 'Daenerys', age: null, task: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa molestias itaque molestiae deleniti quis fugit expedita tempore culpa rerum, voluptatem dicta vitae, necessitatibus aliquid unde, velit fugiat id dignissimos. Itaque." },
-        { id: 6, category: 'Bug', assignee: null, age: 150, task: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa molestias itaque molestiae deleniti quis fugit expedita tempore culpa rerum, voluptatem dicta vitae, necessitatibus aliquid unde, velit fugiat id dignissimos. Itaque." },
-        { id: 7, category: 'Bug', assignee: 'Ferrara', age: 44, task: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa molestias itaque molestiae deleniti quis fugit expedita tempore culpa rerum, voluptatem dicta vitae, necessitatibus aliquid unde, velit fugiat id dignissimos. Itaque." },
-        { id: 8, category: 'Feature', assignee: 'Rossini', age: 36, task: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa molestias itaque molestiae deleniti quis fugit expedita tempore culpa rerum, voluptatem dicta vitae, necessitatibus aliquid unde, velit fugiat id dignissimos. Itaque." },
-        { id: 9, category: 'Bug', assignee: 'Harvey', age: 65, task: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa molestias itaque molestiae deleniti quis fugit expedita tempore culpa rerum, voluptatem dicta vitae, necessitatibus aliquid unde, velit fugiat id dignissimos. Itaque." },
-        { id: 8, category: 'Feature', assignee: 'Rossini', age: 36, task: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa molestias itaque molestiae deleniti quis fugit expedita tempore culpa rerum, voluptatem dicta vitae, necessitatibus aliquid unde, velit fugiat id dignissimos. Itaque." },
-        { id: 9, category: 'Bug', assignee: 'Harvey', age: 65, task: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa molestias itaque molestiae deleniti quis fugit expedita tempore culpa rerum, voluptatem dicta vitae, necessitatibus aliquid unde, velit fugiat id dignissimos. Itaque." },
-        { id: 8, category: 'Feature', assignee: 'Rossini', age: 36, task: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa molestias itaque molestiae deleniti quis fugit expedita tempore culpa rerum, voluptatem dicta vitae, necessitatibus aliquid unde, velit fugiat id dignissimos. Itaque." },
-        { id: 9, category: 'Bug', assignee: 'Harvey', age: 65, task: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa molestias itaque molestiae deleniti quis fugit expedita tempore culpa rerum, voluptatem dicta vitae, necessitatibus aliquid unde, velit fugiat id dignissimos. Itaque." },
-        { id: 8, category: 'Feature', assignee: 'Rossini', age: 36, task: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa molestias itaque molestiae deleniti quis fugit expedita tempore culpa rerum, voluptatem dicta vitae, necessitatibus aliquid unde, velit fugiat id dignissimos. Itaque." },
-        { id: 9, category: 'Bug', assignee: 'Harvey', age: 65, task: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa molestias itaque molestiae deleniti quis fugit expedita tempore culpa rerum, voluptatem dicta vitae, necessitatibus aliquid unde, velit fugiat id dignissimos. Itaque." },
-        { id: 8, category: 'Feature', assignee: 'Rossini', age: 36, task: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa molestias itaque molestiae deleniti quis fugit expedita tempore culpa rerum, voluptatem dicta vitae, necessitatibus aliquid unde, velit fugiat id dignissimos. Itaque." },
-        { id: 9, category: 'Bug', assignee: 'Harvey', age: 65, task: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa molestias itaque molestiae deleniti quis fugit expedita tempore culpa rerum, voluptatem dicta vitae, necessitatibus aliquid unde, velit fugiat id dignissimos. Itaque." },
-        { id: 8, category: 'Feature', assignee: 'Rossini', age: 36, task: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa molestias itaque molestiae deleniti quis fugit expedita tempore culpa rerum, voluptatem dicta vitae, necessitatibus aliquid unde, velit fugiat id dignissimos. Itaque." },
-        { id: 9, category: 'Bug', assignee: 'Harvey', age: 65, task: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa molestias itaque molestiae deleniti quis fugit expedita tempore culpa rerum, voluptatem dicta vitae, necessitatibus aliquid unde, velit fugiat id dignissimos. Itaque." },
-        { id: 8, category: 'Feature', assignee: 'Rossini', age: 36, task: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa molestias itaque molestiae deleniti quis fugit expedita tempore culpa rerum, voluptatem dicta vitae, necessitatibus aliquid unde, velit fugiat id dignissimos. Itaque." },
-        { id: 9, category: 'Bug', assignee: 'Harvey', age: 65, task: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa molestias itaque molestiae deleniti quis fugit expedita tempore culpa rerum, voluptatem dicta vitae, necessitatibus aliquid unde, velit fugiat id dignissimos. Itaque." },
     ];
 
     console.log('tasks from redux store', useSelector(state => state?.tasks?.tasks))
@@ -142,6 +131,7 @@ const Tasks = () => {
         right: 26,
         bgcolor: blue[900],
     };
+
 
 
     return (
@@ -190,7 +180,7 @@ const Tasks = () => {
                         <StyledCard>
                             <Box sx={{ height: 800, width: '100%' }}>
                                 <StyledDataGrid 
-                                    rows={rows}
+                                    rows={tasks}
                                     columns={columns}
                                     initialState={{
                                     pagination: {
@@ -211,7 +201,7 @@ const Tasks = () => {
                         <StyledCard>
                             <Box sx={{ height: 800, width: '100%' }}>
                                 <StyledDataGrid 
-                                    rows={rows}
+                                    rows={tasks}
                                     columns={columns}
                                     initialState={{
                                     pagination: {

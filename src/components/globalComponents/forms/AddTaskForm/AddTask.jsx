@@ -1,6 +1,9 @@
-import { Box, Button, FormControl, InputLabel, MenuItem, Select, Stack, TextField, styled, useTheme } from '@mui/material'
+import { Autocomplete, Box, Button, FormControl, InputLabel, MenuItem, Select, Stack, TextField, styled, useTheme } from '@mui/material'
 import { blue } from '@mui/material/colors';
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux';
+import { addNewTask } from '../../../../app/tasks/taskSlice';
+import md5 from 'blueimp-md5';
 
 const CustomTextField = styled(TextField)({
     '& .MuiInputLabel-root': {
@@ -24,16 +27,12 @@ const FormContainer = styled(Box)({
 });
 
 
-const AddTask = ({formValues, setFormValues}) => {
+const AddTask = () => {
 
     const theme = useTheme();
+    const dispatch = useDispatch();
 
-    // const [formValues, setFormValues] = useState({
-    //     projectName: '',
-    //     description: '',
-    //     projectManager: '',
-    //     status: '',
-    // });
+    const [formValues, setFormValues] = useState({});
     
     const handleInputChange = (e) => {
         // e.preventDefault();
@@ -45,13 +44,31 @@ const AddTask = ({formValues, setFormValues}) => {
         e.preventDefault();
         // Handle form submission logic here
         console.log(formValues);
+        if(dispatch){
+            dispatch(addNewTask(
+                {
+                    "id": md5(Math.random()).substr(0, 5),
+                    "taskName": formValues?.taskName,
+                    "department": formValues?.department,
+                    "description": formValues.description,
+                    "assignee": formValues.assignee,
+                    "priority": formValues.priority,
+                    "taskCategroy": formValues.taskCategroy,
+                    "labels": formValues.labels,
+                }
+            ));
+        }
     };
 
+    const top100Films = [
+        { title: 'good first issue', value: 'good first issue' },
+        { title: 'hot fix', value: 'hot fix' },
+        { title: 'modification', value: 'modification' },
+        { title: 'suggestion', value: 'suggestion' },
+        // { title: 'Developer 5', value: 54465 },
+        // { title: 'Developer 6', value: 65151 },
+    ]
     
-    
-
-
-    console.log("re-renderd");
 
     return (
         <FormContainer>
@@ -141,6 +158,26 @@ const AddTask = ({formValues, setFormValues}) => {
                     <MenuItem value="Feature">Feature</MenuItem>
                 </CustomTextField>
             </Stack>
+            <Autocomplete
+                multiple
+                // id="tags-outlined"
+                options={top100Films}
+                getOptionLabel={(option) => option.title}
+                // defaultValue={[top100Films[3]]}
+                // value={formValues.label}
+                filterSelectedOptions
+                name="labels"
+                onChange={(e, value) => setFormValues({ ...formValues, labels: value })}
+                renderInput={(params) => (
+                    <TextField
+                        {...params}
+                        label="Label"
+                        placeholder="lables"
+                        onChange={(e) => console.log(e)}
+                    />
+                )}
+                id={'label'}
+            />
             <Button 
                 component="label"
                 role={undefined}
