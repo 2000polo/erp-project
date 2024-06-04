@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Kanban from '../../../../components/globalComponents/Kanban';
-import { Box, Card, Chip, Fab, Stack, Tab, Tabs, ToggleButton, ToggleButtonGroup, styled, useTheme } from '@mui/material';
+import { Box, Button, Card, Chip, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Fab, Stack, Tab, Tabs, ToggleButton, ToggleButtonGroup, Typography, styled, useTheme } from '@mui/material';
 import { Groups, Person, Add, Search, ViewWeek, TableRows } from '@mui/icons-material';
 import { DataGrid } from '@mui/x-data-grid';
 import { blue } from '@mui/material/colors';
@@ -8,6 +8,7 @@ import AddTaskForm from '../../../../components/globalComponents/forms/AddTaskFo
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { addNewTask } from '../../../../app/tasks/taskSlice';
+import TaskViewComponent from '../../../../components/globalComponents/TaskViewComponent';
 
 const Tasks = () => {
 
@@ -16,8 +17,18 @@ const Tasks = () => {
 
     const tasks = useSelector((state) => state?.tasks?.tasks);
 
-    const [value, setValue] = React.useState(0);
-    const [view, setView] = React.useState('table');
+    const [value, setValue] = useState(0);
+    const [view, setView] = useState('table');
+
+    const [open, setOpen] = useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
 
     const handleViewChange = (event, nextView) => {
       setView(nextView);
@@ -85,6 +96,13 @@ const Tasks = () => {
             description: 'This column has a value getter and is not sortable.',
             sortable: false,
             width: 900,
+            renderCell: (params) => (
+                <Stack direction={'row'} alignItems={'center'} sx={{height: '100%'}} spacing={1}>
+                <Typography variant='body2' onClick={handleClickOpen}>
+                    {params?.formattedValue}
+                </Typography>
+                </Stack>
+            ),
             // valueGetter: (value, row) => `${row.assignee || ''} ${row.lastName || ''}`,
         },
         { field: 'taskCategroy', headerName: 'Category', 
@@ -217,6 +235,8 @@ const Tasks = () => {
                     }
                 </TabPanel>
             </Box>
+            
+            <TaskViewComponent open={open} onClose={handleClose} />
         </>
     )
 }
