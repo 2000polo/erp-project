@@ -47,12 +47,12 @@ const TaskViewComponent = (props) => {
                 
                 
             </DialogContent>
-            <DialogActions>
+            {/* <DialogActions>
                 <Button onClick={onClose}>Disagree</Button>
                 <Button onClick={onClose} autoFocus>
                     Agree
                 </Button>
-            </DialogActions>
+            </DialogActions> */}
         </GlassDialog>
     )
 }
