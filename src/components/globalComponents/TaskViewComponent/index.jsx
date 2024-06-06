@@ -16,6 +16,7 @@ const TaskViewComponent = (props) => {
           border: '1px solid #ffffff0a', // Border
           borderRadius: '10px', // Rounded corners
         },
+
     });
         
     return (
