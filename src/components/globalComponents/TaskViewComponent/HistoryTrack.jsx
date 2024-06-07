@@ -44,6 +44,7 @@ const HistoryTrack = () => {
                         flex: 0,
                         padding: 0,
                     },
+                    height: 646
                 }}
             >
                 {

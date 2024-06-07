@@ -16,7 +16,7 @@ const TaskViewComponent = (props) => {
           border: '1px solid #ffffff0a', // Border
           borderRadius: '10px', // Rounded corners
         },
-
+        // height: 500
     });
         
     return (
@@ -27,6 +27,7 @@ const TaskViewComponent = (props) => {
             aria-describedby="alert-dialog-description"
             maxWidth='xl'
             fullWidth
+            sx={{minHeight: '100px'}}
         >
             {/* <DialogTitle id="alert-dialog-title">
             {"Use Google's location service?"}
