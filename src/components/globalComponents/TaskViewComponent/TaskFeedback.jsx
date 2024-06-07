@@ -32,15 +32,20 @@ const TaskFeedback = () => {
         <ToggleButton value="history">History</ToggleButton>
         <ToggleButton value="comments">Comments</ToggleButton>
       </ToggleButtonGroup>
-      {
-        taskFeedbackTab === 'history' ?
-        <Box>
-          <HistoryTrack />
-        </Box> :
-        // <Box sx={{ height: '100%'}}>
+      <Box>
+        {
+          taskFeedbackTab === 'history' ?
+          <HistoryTrack /> :
           <CommentsComponent />
-        // </Box>
-      }
+        }
+      </Box>
+      {/* // taskFeedbackTab === 'history' ?
+      // <Box>
+      //   <HistoryTrack />
+      // </Box> :
+      // <Box sx={{ height: '96%'}}>
+      //   <CommentsComponent />
+      // </Box> */}
     </>
   )
 }
