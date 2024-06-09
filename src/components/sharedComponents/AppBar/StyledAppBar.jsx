@@ -16,6 +16,7 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import AvatarDropDown from '../AvatarDropDown';
+import Chat from '../Chat';
 
 const StyledAppDrawer = (props) => {
 
@@ -180,6 +181,12 @@ const StyledAppDrawer = (props) => {
                             </Search>
                         </Box>
                         <Stack sx={{ display: { xs: 'none', sm: 'block' } }} spacing={0} direction='row'>
+                            {/* <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+                                <Badge badgeContent={4} color="error">
+                                    <Chat />
+                                </Badge>
+                            </IconButton> */}
+                            <Chat />
                             <IconButton size="large" aria-label="show 4 new mails" color="inherit">
                                 <Badge badgeContent={4} color="error">
                                     <MailIcon />
@@ -190,9 +197,9 @@ const StyledAppDrawer = (props) => {
                             aria-label="show 17 new notifications"
                             color="inherit"
                             >
-                            <Badge badgeContent={17} color="error">
-                                <NotificationsIcon />
-                            </Badge>
+                                <Badge badgeContent={17} color="error">
+                                    <NotificationsIcon />
+                                </Badge>
                             </IconButton>
                             {/* <IconButton
                             size="large"
@@ -205,9 +212,9 @@ const StyledAppDrawer = (props) => {
                             >
                             <AccountCircle />
                             </IconButton> */}
+                           
                         </Stack>
                         <AvatarDropDown />
-
                         {/* <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
                             <IconButton
                             size="large"
