@@ -1,5 +1,6 @@
 import { Avatar, Paper, Stack, styled } from '@mui/material'
 import React from 'react'
+import ChatProfileAvatar from './ChatProfileAvatar';
 
 const ChatProfiles = () => {
 
@@ -24,10 +25,10 @@ const ChatProfiles = () => {
     });
 
   return (
-    <StyledStack gap={1} direction={'row'}>
+    <StyledStack gap={1.25} direction={'row'}>
         {
             [1,2,3,4,5,6,7,8,9,10,91,12,10,12,34]?.map((obj, i) => {
-                return <Avatar sx={{ marginBottom: '12px'}} key={`avatar-list-chat-icon-${i}`}>A</Avatar>
+                return <ChatProfileAvatar sx={{ margin: '12px 0px'}} key={`avatar-list-chat-icon-${i}`}/>
             })
         }
     </StyledStack>
