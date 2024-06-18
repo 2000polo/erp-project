@@ -34,19 +34,20 @@ const CustomTextField = styled(TextField)({
     },
 });
 
+const GlassDialog = styled(Dialog)({
+    '& .MuiPaper-root': {
+      background: '#2e2e2e33', // Semi-transparent background
+      backdropFilter: 'blur(10px)', // Blur effect
+      boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)', // Soft shadow
+      border: '1px solid #ffffff0a', // Border
+      borderRadius: '10px', // Rounded corners
+    },
+});
+
+
 const AddSubTaskItem = () => {
 
-    const GlassDialog = styled(Dialog)({
-        '& .MuiPaper-root': {
-          background: '#2e2e2e33', // Semi-transparent background
-          backdropFilter: 'blur(10px)', // Blur effect
-          boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)', // Soft shadow
-          border: '1px solid #ffffff0a', // Border
-          borderRadius: '10px', // Rounded corners
-        },
-    });
-
-      
+   
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
@@ -114,7 +115,7 @@ const AddSubTaskItem = () => {
                                         focused
                                         label="Enter sub-task"
                                         name="sub_task"
-                                        value={formValues.projectName}
+                                        value={formValues.subtask}
                                         onChange={handleInputChange}
                                         fullWidth
                                         required
