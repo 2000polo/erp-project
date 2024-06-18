@@ -3,6 +3,7 @@ import SubTaskListItem from './SubTaskListItem'
 import { Button, Divider, Grid, Stack, Typography } from '@mui/material'
 import { blue } from '@mui/material/colors'
 import { Add } from '@mui/icons-material'
+import AddSubTaskItem from './AddSubTaskItem'
 
 const SubTaskList = () => {
   return (
@@ -12,7 +13,7 @@ const SubTaskList = () => {
                 <Typography variant='h6'>Sub Tasks</Typography>
             </Grid>
             <Grid item>
-                <Button 
+                {/* <Button 
                     component="label"
                     role={undefined}
                     variant="contained"
@@ -23,7 +24,8 @@ const SubTaskList = () => {
                     size='small'
                 >
                     Add Sub Task
-                </Button>
+                </Button> */}
+                <AddSubTaskItem />
             </Grid>
             <Grid item xs={12}>
                 <Stack spacing={1} useFlexGap>
