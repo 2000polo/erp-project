@@ -126,17 +126,17 @@ const Tasks = () => {
             headerName: 'Label', 
             width: 260,
             renderCell: (params) => (
-                <Stack direction={'row'} alignItems={'center'} sx={{height: '100%'}} spacing={1}>
-                    {
+                // <Stack direction={'row'} alignItems={'center'} sx={{height: '100%'}} spacing={1}>
+                    // {
                         // console.log(params)
                         params?.formattedValue?.map((label) => {
                             return (
-                                <Chip size='small' label={label?.value} color="info" />
+                                <Chip sx={{background: theme?.palette?.chip?.[label?.value], marginRight: '5px'}} size='small' label={label?.title} />
                             )
                         })
-                    }
+                    // }
                     
-                </Stack>
+                // </Stack>
             ),
         },
     ];
@@ -207,6 +207,7 @@ const Tasks = () => {
                                     }}
                                     pageSizeOptions={[5, 10]}
                                     // checkboxSelection
+                                    
                                 />
                             </Box>
                         </StyledCard> :

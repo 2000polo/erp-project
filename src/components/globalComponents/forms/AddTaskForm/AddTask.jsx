@@ -61,8 +61,8 @@ const AddTask = () => {
     };
 
     const top100Films = [
-        { title: 'good first issue', value: 'good first issue' },
-        { title: 'hot fix', value: 'hot fix' },
+        { title: 'good first issue', value: 'good_first_issue' },
+        { title: 'hot fix', value: 'hot_fix' },
         { title: 'modification', value: 'modification' },
         { title: 'suggestion', value: 'suggestion' },
         // { title: 'Developer 5', value: 54465 },
