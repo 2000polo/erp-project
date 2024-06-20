@@ -19,7 +19,8 @@ export const lightTheme = createTheme({
         yellow: yellow[700],
         pink: pink[300],
         red: red[600],
-        orange: orange[600]
+        orange: orange[600],
+        good_first_issue: red['A400']
       }
     },
     // Other light theme customizations (typography, spacing, etc.) can be added here

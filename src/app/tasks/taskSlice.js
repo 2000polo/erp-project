@@ -20,14 +20,87 @@ export const taskSlice = createSlice({
           },
           {
               "title": "hot fix",
-              "value": "hot fix"
+              "value": "hot_fix"
           },
           {
               "title": "suggestion",
               "value": "suggestion"
           }
-          ]
-      }
+        ],
+        "status": 'open',
+        "progress": 60
+      },
+      {
+        "id": 13,
+        "taskName": "Bug Sample",
+        "department": "Backend",
+        "description": "A sample bug description goes here..",
+        "assignee": "Developer 1",
+        "priority": "Critical",
+        "taskCategroy": "Bug",
+        "labels": [
+          {
+            "title": "feature",
+            "value": "feature"
+          },
+          {
+            "title": "good first issue",
+            "value": "good_first_issue"
+          },
+          {
+            "title": "modification",
+            "value": "modification"
+          },
+        ],
+        "status": 'closed',
+        "progress": 90
+      },
+      {
+        "id": 14,
+        "taskName": "Bug Sample",
+        "department": "Backend",
+        "description": "A sample bug description goes here..",
+        "assignee": "Developer 1",
+        "priority": "Critical",
+        "taskCategroy": "Bug",
+        "labels": [
+          {
+              "title": "modification",
+              "value": "modification"
+          },
+          {
+              "title": "feature",
+              "value": "feature"
+          }
+        ],
+        "status": 'in progress',
+        "progress": 90
+      },
+      {
+        "id": 15,
+        "taskName": "Bug Sample",
+        "department": "Backend",
+        "description": "A sample bug description goes here..",
+        "assignee": "Developer 1",
+        "priority": "Critical",
+        "taskCategroy": "Bug",
+        "labels": [
+          {
+              "title": "good first issue",
+              "value": "good_first_issue"
+          },
+          {
+              "title": "hot fix",
+              "value": "hot_fix"
+          },
+          {
+              "title": "suggestion",
+              "value": "suggestion"
+          }
+        ],
+        "status": 'closed',
+        "progress": 30
+      },
     ]
   },
 

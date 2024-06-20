@@ -55,6 +55,8 @@ const AddTask = () => {
                     "priority": formValues.priority,
                     "taskCategroy": formValues.taskCategroy,
                     "labels": formValues.labels,
+                    "status": 'open',
+                    "progress": 0,
                 }
             ));
         }
