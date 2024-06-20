@@ -1,5 +1,5 @@
 import { createTheme } from "@mui/material";
-import { blue, green, grey, orange, pink, red, yellow } from "@mui/material/colors";
+import { blue, green, grey, orange, pink, purple, red, teal, yellow, deepOrange } from "@mui/material/colors";
 
 export const darkTheme = createTheme({
   palette: {
@@ -20,8 +20,20 @@ export const darkTheme = createTheme({
       yellow: yellow[700],
       pink: pink[300],
       red: red[600],
-      orange: orange[600]
+      orange: orange[600],
+      good_first_issue: red['A400'],
+      modification: blue[600],
+      feature: purple[600],
+      suggestion: orange[600],
+      enchancement: teal[500],
+      hot_fix: deepOrange['A400'],
+    },
+    task_status: {
+      open: blue[800],
+      closed: teal[500],
+      "in progress": yellow[800]
     }
+
   },
   // Other dark theme customizations (typography, spacing, etc.) can be added here
 });

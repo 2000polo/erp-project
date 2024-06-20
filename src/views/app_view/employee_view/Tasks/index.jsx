@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Kanban from '../../../../components/globalComponents/Kanban';
-import { Box, Button, Card, Chip, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Fab, Stack, Tab, Tabs, ToggleButton, ToggleButtonGroup, Typography, styled, useTheme } from '@mui/material';
-import { Groups, Person, Add, Search, ViewWeek, TableRows } from '@mui/icons-material';
+import { Box, Button, Card, Chip, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Fab, IconButton, Stack, Tab, Tabs, ToggleButton, ToggleButtonGroup, Typography, alpha, keyframes, styled, useTheme } from '@mui/material';
+import { Groups, Person, Add, Search, ViewWeek, TableRows, PlayArrow, TaskAlt, DirectionsRun } from '@mui/icons-material';
 import { DataGrid } from '@mui/x-data-grid';
 import { blue } from '@mui/material/colors';
 import AddTaskForm from '../../../../components/globalComponents/forms/AddTaskForm';
@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { addNewTask } from '../../../../app/tasks/taskSlice';
 import TaskViewComponent from '../../../../components/globalComponents/TaskViewComponent';
+import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress';
 
 const Tasks = () => {
 
@@ -42,6 +43,23 @@ const Tasks = () => {
     function TabPanel(props) {
         const { children, value, index, ...other } = props;
         return value == index && children
+    }
+
+    const taskActionStatus = {
+        "open": {
+            icon: <PlayArrow/>,
+            color: ''
+        },
+        "in progress": {
+            icon: <DirectionsRun/>,
+            color: '',
+            animation: true
+        },
+        "closed": {
+            icon: <TaskAlt />,
+            color: '',
+            popover: true
+        }
     }
 
     const StyledTab = styled(Tab)({
@@ -87,6 +105,35 @@ const Tasks = () => {
         },
     });
 
+    const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
+        height: 5,
+        width: '100%',
+        borderRadius: 5,
+        [`&.${linearProgressClasses.colorPrimary}`]: {
+          backgroundColor: theme.palette.grey[theme.palette.mode === 'light' ? 200 : 800],
+        },
+        [`& .${linearProgressClasses.bar}`]: {
+          borderRadius: 5,
+          backgroundColor: theme.palette.mode === 'light' ? '#1a90ff' : '#308fe8',
+        },
+    }));
+
+    const pulseAnimation = (color) => {
+        return keyframes`
+        0% {
+            box-shadow: 0 0 0 0px ${color};
+            scale: 0.7;
+        }
+        50% {
+            box-shadow: 0 0 0 10px ${color};
+            scale: 1;
+        }
+        100% {
+            box-shadow: 0 0 0 0px  ${color};
+            scale: 0.7;
+        }`
+    }
+
     const columns = [
         { field: 'id', headerName: 'ID', 
         width: 70 },
@@ -95,7 +142,7 @@ const Tasks = () => {
             headerName: 'Task',
             description: 'This column has a value getter and is not sortable.',
             sortable: false,
-            width: 900,
+            width: 520,
             renderCell: (params) => (
                 <Stack direction={'row'} alignItems={'center'} sx={{height: '100%'}} spacing={1}>
                 <Typography variant='body2' onClick={handleClickOpen}>
@@ -103,7 +150,32 @@ const Tasks = () => {
                 </Typography>
                 </Stack>
             ),
-            // valueGetter: (value, row) => `${row.assignee || ''} ${row.lastName || ''}`,
+        },
+        { field: 'status', headerName: 'Action', 
+            width: 60,
+            renderCell: (params) => (
+                <Stack direction={'row'} alignItems={'center'} sx={{height: '100%'}} spacing={1}>
+                    <IconButton 
+                    sx={{
+                        borderRadius: '50%',
+                        animation: params?.formattedValue === 'in progress' ? `${pulseAnimation(alpha(theme?.palette?.task_status?.[params?.formattedValue], 0.2))} 1s infinite` : 'none',
+                        background: theme?.palette?.task_status?.[params?.formattedValue]
+                    }}
+                    size='small'  
+                    variant="contained" >{taskActionStatus?.[params?.formattedValue]?.icon}</IconButton>
+                </Stack>
+            ),
+        },
+        { field: 'progress', headerName: 'Progress', 
+            width: 220,
+            renderCell: (params) => (
+                <Stack direction={'row'} alignItems={'center'} sx={{height: '100%'}} spacing={1}>
+                    <BorderLinearProgress variant="determinate" value={params?.formattedValue} />
+                    <Typography variant='body2' onClick={handleClickOpen}>
+                        {params?.formattedValue}%
+                    </Typography>
+                </Stack>
+            ),
         },
         { field: 'taskCategroy', headerName: 'Category', 
             width: 120 
@@ -124,24 +196,16 @@ const Tasks = () => {
         { 
             field: 'labels', 
             headerName: 'Label', 
-            width: 260,
+            width: 360,
             renderCell: (params) => (
-                <Stack direction={'row'} alignItems={'center'} sx={{height: '100%'}} spacing={1}>
-                    {
-                        // console.log(params)
-                        params?.formattedValue?.map((label) => {
-                            return (
-                                <Chip size='small' label={label?.value} color="info" />
-                            )
-                        })
-                    }
-                    
-                </Stack>
+                params?.formattedValue?.map((label) => {
+                    return (
+                        <Chip sx={{background: theme?.palette?.chip?.[label?.value], marginRight: '5px'}} size='small' label={label?.title} />
+                    )
+                })
             ),
         },
     ];
-
-    console.log('tasks from redux store', useSelector(state => state?.tasks?.tasks))
 
     const fabStyle = {
         position: 'absolute',
@@ -207,6 +271,7 @@ const Tasks = () => {
                                     }}
                                     pageSizeOptions={[5, 10]}
                                     // checkboxSelection
+                                    
                                 />
                             </Box>
                         </StyledCard> :

@@ -1,7 +1,10 @@
-import { Box, Card, CardMedia, Divider, Stack, Typography, alpha, styled, useTheme } from '@mui/material'
+import { Box, Button, Card, CardMedia, Divider, Stack, Typography, alpha, styled, useTheme } from '@mui/material'
 import React from 'react'
 import SubTaskList from './SubTaskList';
 import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress';
+import { blue } from '@mui/material/colors';
+import ButtonDropDown from '../ButtonDropdown';
+import { Construction, PlayArrow } from '@mui/icons-material';
 
 const TaskDetailsInfo = () => {
 
@@ -18,10 +21,16 @@ const TaskDetailsInfo = () => {
           backgroundColor: theme.palette.mode === 'light' ? '#1a90ff' : '#308fe8',
         },
     }));
+
+    const options = ['Start', 'Halt', 'Close'];
         
     return (
         <>
-            <Typography sx={{marginBottom: '9px'}} variant='h5'>Example Task Name</Typography>
+            <Stack sx={{marginBottom: '14px'}} direction={'row'} alignItems={'center'} justifyContent={'space-between'}>
+                <Typography sx={{marginBottom: '9px'}} variant='h5'>Example Task Name</Typography>
+                {/* <ButtonDropDown options={options} /> */}
+            </Stack>
+
             <Typography sx={{marginBottom: '14px'}} color={alpha(theme.palette.text.primary, 0.7)} variant='subtitle2'>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat assumenda, vero asperiores dolore aut recusandae officiis ex, nostrum soluta a at rerum aperiam aspernatur. Temporibus id saepe incidunt. Quasi eligendi nihil voluptas officiis. Dolorum blanditiis molestias ea corporis accusantium minus necessitatibus. Enim natus laborum possimus!</Typography>
             
             <Stack sx={{marginBottom: '14px'}} direction={'row'} useFlexGap spacing={1}>
@@ -43,6 +52,21 @@ const TaskDetailsInfo = () => {
                 </Card>
             </Stack>
 
+            {/* <Stack sx={{marginBottom: '14px'}} direction={'row'} alignItems={'center'} justifyContent={'end'}>
+                <Button 
+                    component="label"
+                    role={undefined}
+                    variant="contained"
+                    // tabIndex={-1}
+                    startIcon={<Construction />}
+                    sx={{bgcolor: blue[900]}}
+                    // onClick={handleSubmit}
+                    size='small'
+                >
+                    Start
+                </Button>
+            </Stack> */}
+            
             <Box sx={{marginBottom: '14px'}}>
                 <Stack spacing={1} useFlexGap>
                     <Stack direction={'row'} alignItems={'center'} justifyContent={'space-between'}>
