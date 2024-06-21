@@ -7,7 +7,7 @@ import { blue } from '@mui/material/colors';
 import AddTaskForm from '../../../../components/globalComponents/forms/AddTaskForm';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { addNewTask } from '../../../../app/tasks/taskSlice';
+import { addNewTask, getTaskDetailsById } from '../../../../app/tasks/taskSlice';
 import TaskViewComponent from '../../../../components/globalComponents/TaskViewComponent';
 import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress';
 
@@ -23,9 +23,15 @@ const Tasks = () => {
 
     const [open, setOpen] = useState(false);
 
-    const handleClickOpen = () => {
+    const handleClickOpen = (id) => {
+        dispatch(getTaskDetailsById({
+            id: id
+        }));
         setOpen(true);
+
     };
+
+    console.log('printing store data', useSelector((state) => state?.tasks))
 
     const handleClose = () => {
         setOpen(false);
@@ -145,7 +151,7 @@ const Tasks = () => {
             width: 520,
             renderCell: (params) => (
                 <Stack direction={'row'} alignItems={'center'} sx={{height: '100%'}} spacing={1}>
-                <Typography variant='body2' onClick={handleClickOpen}>
+                <Typography variant='body2' onClick={() => handleClickOpen(params?.id)}>
                     {params?.formattedValue}
                 </Typography>
                 </Stack>
@@ -161,6 +167,7 @@ const Tasks = () => {
                         animation: params?.formattedValue === 'in progress' ? `${pulseAnimation(alpha(theme?.palette?.task_status?.[params?.formattedValue], 0.2))} 1s infinite` : 'none',
                         background: theme?.palette?.task_status?.[params?.formattedValue]
                     }}
+                    // onClick={() => console.log("params n clicking button", params)}
                     size='small'  
                     variant="contained" >{taskActionStatus?.[params?.formattedValue]?.icon}</IconButton>
                 </Stack>

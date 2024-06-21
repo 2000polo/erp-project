@@ -57,6 +57,7 @@ const AddTask = () => {
                     "labels": formValues.labels,
                     "status": 'open',
                     "progress": 0,
+                    "sub_tasks": [],
                 }
             ));
         }

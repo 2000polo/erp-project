@@ -9,6 +9,7 @@ import Slide from '@mui/material/Slide';
 import { blue } from '@mui/material/colors';
 import { Add } from '@mui/icons-material';
 import { Box, FormControl, Grid, InputLabel, MenuItem, Select, TextField, Typography, styled } from '@mui/material';
+import { useDispatch } from 'react-redux';
 // import AddProject from './AddProject';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -47,6 +48,7 @@ const GlassDialog = styled(Dialog)({
 
 const AddSubTaskItem = () => {
 
+    const dispatch = useDispatch();
    
     const [open, setOpen] = React.useState(false);
 
@@ -58,16 +60,20 @@ const AddSubTaskItem = () => {
         setOpen(false);
     };
 
-    const [formValues, setFormValues] = useState({
-        projectName: '',
-        description: '',
-        projectManager: '',
-        status: '',
-    });
+    const [formValues, setFormValues] = useState({});
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormValues({ ...formValues, [name]: value });
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // Handle form submission logic here
+        console.log(formValues);
+        // if(dispatch){
+        //     dispatch();
+        // }
     };
 
     // Project Name
@@ -131,7 +137,7 @@ const AddSubTaskItem = () => {
                                     tabIndex={-1}
                                     startIcon={<Add />}
                                     sx={{bgcolor: blue[900]}}
-                                    onClick={handleClickOpen}
+                                    onClick={handleSubmit}
                                     size='medium'
                                 >
                                     Add
