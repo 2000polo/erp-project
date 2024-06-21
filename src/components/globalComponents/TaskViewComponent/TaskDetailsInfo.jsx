@@ -2,9 +2,6 @@ import { Box, Button, Card, CardMedia, Divider, Stack, Typography, alpha, styled
 import React from 'react'
 import SubTaskList from './SubTaskList';
 import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress';
-import { blue } from '@mui/material/colors';
-import ButtonDropDown from '../ButtonDropdown';
-import { Construction, PlayArrow } from '@mui/icons-material';
 
 const TaskDetailsInfo = () => {
 
