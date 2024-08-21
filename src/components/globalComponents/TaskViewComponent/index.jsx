@@ -4,21 +4,21 @@ import MetaInfoContent from './MetaInfoContent';
 import TaskDetailsInfo from './TaskDetailsInfo';
 import TaskFeedback from './TaskFeedback';
 
+const GlassDialog = styled(Dialog)({
+    '& .MuiPaper-root': {
+      background: '#2e2e2e33', // Semi-transparent background
+      backdropFilter: 'blur(10px)', // Blur effect
+      boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)', // Soft shadow
+      border: '1px solid #ffffff0a', // Border
+      borderRadius: '10px', // Rounded corners
+    },
+    // height: 500
+});
+
 const TaskViewComponent = (props) => {
 
     const { onClose, open } = props;
 
-    const GlassDialog = styled(Dialog)({
-        '& .MuiPaper-root': {
-          background: '#2e2e2e33', // Semi-transparent background
-          backdropFilter: 'blur(10px)', // Blur effect
-          boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)', // Soft shadow
-          border: '1px solid #ffffff0a', // Border
-          borderRadius: '10px', // Rounded corners
-        },
-        // height: 500
-    });
-        
     return (
         <GlassDialog
             open={open}
