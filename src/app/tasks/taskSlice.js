@@ -186,11 +186,48 @@ export const taskSlice = createSlice({
         // tasks: [...state?.tasks],
         selected_task_data: state?.tasks?.filter((task) => task?.id === action?.payload?.id)[0]
       }
+    },
+
+    updateTaskById: (state, action) => {
+      console.log("printing payload", action?.payload);
+      // return { ...state, 
+      //   tasks: state?.tasks?.map((task) => {
+      //     if( task?.id === action?.payload?.id){
+      //       return { ...task, sub_tasks: [...task?.sub_tasks, action?.payload?.data]}
+      //     }
+      //     return task
+      //   })
+      // }
+      const updatedTasks = state?.tasks?.map((task) => {
+        if (task?.id === action?.payload?.id) {
+            console.log("Updating task:", task);
+            return { 
+                ...task, 
+                sub_tasks: [...task?.sub_tasks, action?.payload?.data] 
+            };
+        }
+        return task;
+      });
+
+      const updatedSelectedTask = state.selected_task_data?.id === action.payload.id
+        ? {
+            ...state.selected_task_data,
+            sub_tasks: [...state.selected_task_data?.sub_tasks, action.payload.data]
+          }
+        : state.selected_task_data;
+
+      console.log("Updated Tasks:", updatedTasks);
+
+      return { 
+          ...state, 
+          tasks: updatedTasks,
+          selected_task_data: updatedSelectedTask
+      };
     }
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { increment, decrement, incrementByAmount, addNewTask, getTaskDetailsById } = taskSlice.actions
+export const { increment, decrement, incrementByAmount, addNewTask, getTaskDetailsById, updateTaskById } = taskSlice.actions
 
 export default taskSlice.reducer

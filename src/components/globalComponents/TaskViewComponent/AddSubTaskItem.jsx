@@ -10,30 +10,16 @@ import { blue } from '@mui/material/colors';
 import { Add } from '@mui/icons-material';
 import { Box, FormControl, Grid, InputLabel, MenuItem, Select, TextField, Typography, styled } from '@mui/material';
 import { useDispatch } from 'react-redux';
+import { updateTaskById } from '../../../app/tasks/taskSlice';
+import { useSelector } from 'react-redux';
+import md5 from 'blueimp-md5';
+import AddSubTask from './AddSubTask';
 // import AddProject from './AddProject';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const FormContainer = styled(Box)({
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '16px',
-    padding: '24px 0px',
-    margin: 'auto',
-    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-    borderRadius: '8px',
-});
-
-const CustomTextField = styled(TextField)({
-    '& .MuiInputLabel-root': {
-      color: 'blue', // Default label color
-    },
-    '& .MuiInputLabel-root.Mui-focused': {
-      color: '#c7c7c7', // Label color when focused
-    },
-});
 
 const GlassDialog = styled(Dialog)({
     '& .MuiPaper-root': {
@@ -48,9 +34,10 @@ const GlassDialog = styled(Dialog)({
 
 const AddSubTaskItem = () => {
 
-    const dispatch = useDispatch();
-   
+    // const dispatch = useDispatch();
+
     const [open, setOpen] = React.useState(false);
+    // const selectedTaskId = useSelector((state) => state?.tasks?.selected_task_data?.id);
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -60,32 +47,30 @@ const AddSubTaskItem = () => {
         setOpen(false);
     };
 
-    const [formValues, setFormValues] = useState({});
+    // const [formValues, setFormValues] = useState({});
 
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setFormValues({ ...formValues, [name]: value });
-    };
+    // const handleInputChange = (e) => {
+    //     const { name, value } = e.target;
+    //     setFormValues({ ...formValues, [name]: value });
+    // };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // Handle form submission logic here
-        console.log(formValues);
-        // if(dispatch){
-        //     dispatch();
-        // }
-    };
-
-    // Project Name
-    // Project Logo
-    // Assigned Team
-    // Client Name
-    // Project Manager
-    // Duration - start date end date
-    // Project Description
-    // Technologies Used
-    // Phases
-
+    // const handleSubmit = (e) => {
+    //     e.preventDefault();
+    //     // Handle form submission logic here
+    //     console.log(formValues);
+    //     if(dispatch){
+    //         dispatch(updateTaskById(
+    //             {
+    //                 id: selectedTaskId,
+    //                 data: {
+    //                     "sub_task_id": md5(Math.random()).substr(0, 5),
+    //                     "sub_task": formValues?.sub_task,
+    //                     "is_complete": false
+    //                 },
+    //             }
+    //         ));
+    //     }
+    // };
 
     return (
         <React.Fragment>
@@ -112,40 +97,7 @@ const AddSubTaskItem = () => {
             >
                 {/* <DialogTitle>{"Add New Project"}</DialogTitle> */}
                 <DialogContent>
-                    <FormContainer>
-                        <Grid container spacing={2} direction="row" alignItems={'center'} >
-                            <Grid spacing={2} container item xs={10}>
-                                <Grid item xs={12}> 
-                                    <CustomTextField
-                                        // color={'red'}
-                                        focused
-                                        label="Enter sub-task"
-                                        name="sub_task"
-                                        value={formValues.subtask}
-                                        onChange={handleInputChange}
-                                        fullWidth
-                                        required
-                                        size='small'
-                                    />
-                                </Grid>
-                            </Grid>
-                            <Grid item xs={2}> 
-                                <Button
-                                    component="label"
-                                    role={undefined}
-                                    variant="contained"
-                                    tabIndex={-1}
-                                    startIcon={<Add />}
-                                    sx={{bgcolor: blue[900]}}
-                                    onClick={handleSubmit}
-                                    size='medium'
-                                >
-                                    Add
-                                </Button>
-                            </Grid>
-                        </Grid>
-                    </FormContainer>
-
+                    <AddSubTask />
                 </DialogContent>
             </GlassDialog>
         </React.Fragment>

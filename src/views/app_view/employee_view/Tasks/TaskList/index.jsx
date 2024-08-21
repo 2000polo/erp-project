@@ -4,9 +4,25 @@ import { Box, Card, Chip, Fab, Stack, Typography, styled, useTheme } from '@mui/
 import AddIcon from '@mui/icons-material/Add';
 import { blue, green } from '@mui/material/colors';
 
+
+const StyledDataGrid = styled(DataGrid)({
+    borderColor: "#09090b00",
+    '.MuiDataGrid-root': {
+        backgroundColor: 'red', // Change the background color of the grid
+    },
+    '.MuiDataGrid-row': {
+        color: 'whitesmoke', // Change the text color of rows
+    },
+    ' .MuiDataGrid-columnHeaders': {
+        backgroundColor: 'red !important', // Change the background color of column headers
+    },
+    '.css-teffd5-MuiDataGrid-root': {
+        BorderColor: 'none'
+    },
+});
+
 const TaskList = () => {
-
-
+    
     const theme = useTheme();
 
     const StyledCard = styled(Card)({
@@ -18,22 +34,6 @@ const TaskList = () => {
         //     background: 'linear-gradient(to top, #396afc, #2948ff);',
         // }
     })
-
-    const StyledDataGrid = styled(DataGrid)({
-        borderColor: "#09090b00",
-        '.MuiDataGrid-root': {
-            backgroundColor: 'red', // Change the background color of the grid
-        },
-        '.MuiDataGrid-row': {
-            color: 'whitesmoke', // Change the text color of rows
-        },
-        ' .MuiDataGrid-columnHeaders': {
-            backgroundColor: 'red !important', // Change the background color of column headers
-        },
-        '.css-teffd5-MuiDataGrid-root': {
-            BorderColor: 'none'
-        },
-    });
 
     const columns = [
         { field: 'id', headerName: 'ID', 
