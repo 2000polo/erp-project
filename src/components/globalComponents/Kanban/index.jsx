@@ -315,9 +315,9 @@ const DragAndDrop = () => {
     }
 
     return (
-        <main className="board">
-                <Grid container spacing={2} direction="column" >
-                    <Grid container item spacing={2} direction="row" justifyContent= 'space-between'>
+        <main style={{ width:'100%', overflowX: 'auto'}} >
+                <Grid container spacing={2} direction="row" justifyContent= 'start' wrap="nowrap">
+                    {/* <Grid  container item spacing={2} direction="row" justifyContent= 'space-between'> */}
                         <Grid item xs={3} >
                             <ListComponenct setCards={setCards} title={'Todo'} state={'todo'} cards={cards} />
                         </Grid>
@@ -330,7 +330,10 @@ const DragAndDrop = () => {
                         <Grid item xs={3}>
                             <ListComponenct setCards={setCards} title={'Halted'} state={'halted'} cards={cards} /> 
                         </Grid>
-                    </Grid>
+                        <Grid item xs={3}>
+                            <ListComponenct setCards={setCards} title={'Halted'} state={'halted'} cards={cards} /> 
+                        </Grid>
+                    {/* </Grid> */}
                 </Grid>
         </main>
     )
