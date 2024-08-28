@@ -39,7 +39,7 @@ const Tasks = () => {
 
     const handleViewChange = (event, nextView) => {
       setView(nextView);
-      dispatch(addNewTask('action'));
+    //   dispatch(addNewTask('action'));
     };
 
     const handleChange = (event, newValue) => {
@@ -140,9 +140,11 @@ const Tasks = () => {
         }`
     }
 
+    const getRowId = (row) => {return row?.id}; 
+
     const columns = [
-        { field: 'id', headerName: 'ID', 
-        width: 70 },
+        // { field: 'id', headerName: 'ID', 
+        // width: 70 },
         {
             field: 'description',
             headerName: 'Task',
@@ -221,45 +223,47 @@ const Tasks = () => {
         bgcolor: blue[900],
     };
 
-
+    console.log("tasks", tasks)
 
     return (
-        <>
+        <Box width={"100%"}>
             {/* Header */}
-            <Stack direction={'row'} justifyContent={'space-between'} alignItems={'center'}>
-                <Box>
-                    <Tabs
-                        value={value}
-                        onChange={handleChange}
-                        variant="scrollable"
-                        scrollButtons={false}
-                        aria-label="scrollable auto tabs example"
-                    >
-                        <StyledTab label="My Tasks" {...a11yProps(1)} iconPosition="start"  icon={<Person/>} />
-                        <StyledTab label="Team Tasks" {...a11yProps(0)} iconPosition="start"  icon={<Groups/>}/>
-                    </Tabs>
-                </Box>
-
-                <Box >
-                    <Stack direction={'row'} spacing={1}>
-                        <ToggleButtonGroup
-                            orientation="horizontal"
-                            value={view}
-                            exclusive
-                            onChange={handleViewChange}
+            <Box>
+                <Stack direction={'row'} justifyContent={'space-between'} alignItems={'center'}>
+                    <Box>
+                        <Tabs
+                            value={value}
+                            onChange={handleChange}
+                            variant="scrollable"
+                            scrollButtons={false}
+                            aria-label="scrollable auto tabs example"
                         >
-                            <ToggleButton value="table" aria-label="table">
-                                <TableRows />
-                            </ToggleButton>
+                            <StyledTab label="My Tasks" {...a11yProps(1)} iconPosition="start"  icon={<Person/>} />
+                            <StyledTab label="Team Tasks" {...a11yProps(0)} iconPosition="start"  icon={<Groups/>}/>
+                        </Tabs>
+                    </Box>
 
-                            <ToggleButton value="kanban" aria-label="kanban">
-                                <ViewWeek />
-                            </ToggleButton>
-                        </ToggleButtonGroup>
-                        <AddTaskForm />
-                    </Stack>
-                </Box>
-            </Stack>
+                    <Box >
+                        <Stack direction={'row'} spacing={1}>
+                            <ToggleButtonGroup
+                                orientation="horizontal"
+                                value={view}
+                                exclusive
+                                onChange={handleViewChange}
+                            >
+                                <ToggleButton value="table" aria-label="table">
+                                    <TableRows />
+                                </ToggleButton>
+
+                                <ToggleButton value="kanban" aria-label="kanban">
+                                    <ViewWeek />
+                                </ToggleButton>
+                            </ToggleButtonGroup>
+                            <AddTaskForm />
+                        </Stack>
+                    </Box>
+                </Stack>
+            </Box>
             
             {/* Tabs and page contents */}
             <Box sx={{ marginTop: '16px'}}>
@@ -278,14 +282,14 @@ const Tasks = () => {
                                     }}
                                     pageSizeOptions={[5, 10]}
                                     // checkboxSelection
-                                    
+                                    getRowId={getRowId}
                                 />
                             </Box>
                         </StyledCard> :
                         <Kanban />
                     }
                 </TabPanel>
-                <TabPanel value={value} index={1}>
+                {/* <TabPanel value={value} index={1}>
                     {
                         view === 'table' ?
                         <StyledCard>
@@ -305,11 +309,11 @@ const Tasks = () => {
                         </StyledCard> :
                         <Kanban />
                     }
-                </TabPanel>
+                </TabPanel> */}
             </Box>
             
             <TaskViewComponent open={open} onClose={handleClose} />
-        </>
+        </Box>
     )
 }
 

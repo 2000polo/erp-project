@@ -6,7 +6,7 @@ export const taskSlice = createSlice({
     value: 0,
     tasks: [
       {
-        "id": 12,
+        "id": 1,
         "taskName": "Bug Sample",
         "department": "Backend",
         "description": "A sample bug description goes here..",
@@ -48,7 +48,7 @@ export const taskSlice = createSlice({
         ]
       },
       {
-        "id": 13,
+        "id": 2,
         "taskName": "Bug Sample",
         "department": "Backend",
         "description": "A sample bug description goes here..",
@@ -90,7 +90,7 @@ export const taskSlice = createSlice({
         ]
       },
       {
-        "id": 14,
+        "id": 3,
         "taskName": "Bug Sample",
         "department": "Backend",
         "description": "A sample bug description goes here..",
@@ -128,7 +128,7 @@ export const taskSlice = createSlice({
         ]
       },
       {
-        "id": 15,
+        "id": 4,
         "taskName": "Bug Sample",
         "department": "Backend",
         "description": "A sample bug description goes here..",
