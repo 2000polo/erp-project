@@ -4,6 +4,7 @@ import ListComponenct from './ListComponent';
 import { Box, Fab, Grid, Stack, Tab, Tabs, styled, tabsClasses, useTheme } from '@mui/material';
 import { AddCard, AddCircleOutline, Groups, Person } from '@mui/icons-material';
 import { red } from '@mui/material/colors';
+import { useSelector } from 'react-redux';
 
 const initialState = [
     { 
@@ -217,7 +218,10 @@ const initialState = [
     }
 ];
 
-const DragAndDrop = () => {
+const DragAndDrop = (props) => {
+
+    // const kanbanTasks = useSelector((state) => state?.tasks?.kanbanData);
+    const { kanbanTasks } = props;
 
     const theme = useTheme();
     const [cards, setCards] = useState(initialState);
@@ -254,71 +258,13 @@ const DragAndDrop = () => {
         }
     }
 
-    const StyledTabs = styled((props) => (
-        <Tabs
-            textColor='primary'
-          {...props}
-          TabIndicatorProps={{ children: <span className="MuiTabs-indicatorSpan" /> }}
-        />
-      ))({
-        // '& .MuiTabs-indicator': {
-        //   display: 'flex',
-        //   justifyContent: 'center',
-        //   backgroundColor: 'transparent',
-        // //   backgroundColor: 'rgba(100, 95, 228, 0.2)',
-        // },
-        // '& .MuiTabs-indicatorSpan': {
-        //   maxWidth: 40,
-        //   width: '100%',
-        //   backgroundColor: '#635ee7',
-        // },
-        '& .Mui-selected': {
-            backgroundColor: '#635ee7',
-        },
-        '& .MuiTab-textColorPrimary': {
-            textColorPrimary: red
-        },
-
-
-    });
-
-    const StyledTab = styled(Tab)({
-        // textTransform: 'none',
-        // minWidth: 100,
-        // fontWeight: 'bold',
-        // marginRight: '20px',
-        // color: '#555',
-        // '&.Mui-selected': {
-        //   color: '#1976d2',
-        // },
-        // '&.Mui-focusVisible': {
-        //   backgroundColor: 'rgba(100, 95, 228, 0.32)',
-        // },
-        textTransform: 'none',
-        fontWeight: theme.typography.fontWeightRegular,
-        fontSize: theme.typography.pxToRem(15),
-        marginRight: theme.spacing(1),
-        color: 'rgba(255, 255, 255, 0.7)',
-        '&.Mui-selected': {
-        color: '#fff',
-        },
-        '&.Mui-focusVisible': {
-        backgroundColor: 'rgba(100, 95, 228, 0.32)',
-        },
-      });
-
-    function a11yProps(index) {
-        return {
-          id: `scrollable-auto-tab-${index}`,
-          "aria-controls": `scrollable-auto-tabpanel-${index}`
-        };
-    }
+    console.log("Object.keys(kanbanTasks)", Object.keys(kanbanTasks))
 
     return (
-        <main style={{ width:'100%', overflowX: 'auto'}} >
-                <Grid container spacing={2} direction="row" justifyContent= 'start' wrap="nowrap">
+        <main>
+                <Grid style={{overflowX: 'scroll'}} container spacing={2} direction="row" justifyContent= 'start' wrap='nowrap' >
                     {/* <Grid  container item spacing={2} direction="row" justifyContent= 'space-between'> */}
-                        <Grid item xs={3} >
+                        {/* <Grid item xs={3} >
                             <ListComponenct setCards={setCards} title={'Todo'} state={'todo'} cards={cards} />
                         </Grid>
                         <Grid item xs={3}>
@@ -332,8 +278,23 @@ const DragAndDrop = () => {
                         </Grid>
                         <Grid item xs={3}>
                             <ListComponenct setCards={setCards} title={'Halted'} state={'halted'} cards={cards} /> 
-                        </Grid>
+                        </Grid> */}
                     {/* </Grid> */}
+                    {
+                        Object.keys(kanbanTasks)?.map((tasks) => {
+                            // console.log(first)
+                            // <Grid item xs={3}>
+                            //     <ListComponenct setCards={setCards} title={tasks} state={tasks} cards={kanbanTasks?.[tasks]} />
+                            // </Grid>
+                            return (
+                                <Grid item xs={3}>
+                                    <ListComponenct title={tasks} state={tasks} cards={kanbanTasks?.[tasks]} />
+                                </Grid>
+                            )
+                            
+                        })
+                    }
+                    
                 </Grid>
         </main>
     )

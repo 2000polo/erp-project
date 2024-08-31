@@ -4,11 +4,16 @@ import styled from 'styled-components';
 import { Button, Card, Divider, IconButton, Stack, Typography, alpha, useTheme } from '@mui/material';
 import TaskCard from './TaskCard';
 import { SearchOutlined } from '@mui/icons-material';
+import { useDispatch } from 'react-redux';
+import { updateTaskStatus } from '../../../app/tasks/taskSlice';
 
 const ListComponent = (props) => {
 
+    const dispatch = useDispatch();
     const { state, cards, title, setCards } = props;
     const theme = useTheme();
+
+    const [ currentStatus, setCurrentStatus ] = useState();
 
 
     const StyledCard = styled(Card)({
@@ -38,32 +43,42 @@ const ListComponent = (props) => {
     }, [])
 
     const dragEnter = event => {
-        event.currentTarget.classList.add('drop')
+        event.currentTarget.classList.add('drop');
+        
     };
     
     const dragLeave = event => {
-        event.currentTarget.classList.remove('drop')
+        event.currentTarget.classList.remove('drop');
+        
+
     };
 
     const drop = event => {
-        const column = event.currentTarget.dataset.column
-        const id = Number(event.dataTransfer.getData('text/plain'))
+        const column = event.currentTarget.dataset.column;
+        const id = Number(event.dataTransfer.getData('text/plain'));
     
-        console.log("column and id printing", column, id, cards[state])
+        console.log("column and id printing", column, id, cards[state], state, cards)
+        
         event.currentTarget.classList.remove('drop')
     
         event.preventDefault()
     
         const updatedState = cards.map(card => {
             if (card.id === id) {
-                card.state = column;
+                // card.status = column;
+                return {...card, status: column}
             }
             return card
         })
 
-        console.log("selected card", cards[state], state, props.task)
-
-        setCards(updatedState)
+        console.log("selected card", cards[state], state, props.task, title)
+        dispatch(updateTaskStatus({
+            id: id,
+            column: column,
+            updatedData: updatedState,
+            currentStatus: currentStatus,
+        }));
+        // setCards(updatedState)
     }
 
     const allowDrop = event => {
@@ -74,6 +89,7 @@ const ListComponent = (props) => {
         if (event.target.className.includes('card')) {
             event.target.classList.add('dragging')
         }
+        
     }
     
     const dragEnd = event => {
@@ -83,10 +99,13 @@ const ListComponent = (props) => {
     }
 
     const drag = (event, task) => {
-        event.dataTransfer.setData('text/plain', event.currentTarget.dataset.id)
+        event.dataTransfer.setData('text/plain', event.currentTarget.dataset.id);
+        event.dataTransfer.setData('status', task.status);
+        console.log("target", task)
+        setCurrentStatus(() => task.status);
     };
 
-    console.log("cards", props?.task)
+    console.log("cards", cards)
 
     return (
         <Stack spacing={1} direction={'column'}> 
@@ -112,10 +131,10 @@ const ListComponent = (props) => {
             >
                 
                 {
-                    cards?.filter(card => card.state === state).map(todo => (
+                    cards?.filter(card => card.status === state).map(todo => (
                         <TaskCard 
-                            name={todo?.name} 
-                            team={todo?.team} 
+                            name={todo?.taskName} 
+                            team={todo?.department} 
                             value={todo} 
                             key={todo.id} 
                             className="card" 
