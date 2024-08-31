@@ -7,7 +7,7 @@ import { blue } from '@mui/material/colors';
 import AddTaskForm from '../../../../components/globalComponents/forms/AddTaskForm';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { addNewTask, getTaskDetailsById } from '../../../../app/tasks/taskSlice';
+import { addNewTask, getTaskDetailsById, getKanbanData } from '../../../../app/tasks/taskSlice';
 import TaskViewComponent from '../../../../components/globalComponents/TaskViewComponent';
 import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress';
 
@@ -17,6 +17,9 @@ const Tasks = () => {
     const dispatch = useDispatch();
 
     const tasks = useSelector((state) => state?.tasks?.tasks);
+    const kanbanTasks = useSelector((state) => state?.tasks?.kanbanData);
+
+    console.log("kanbanTasks", kanbanTasks);
 
     const [value, setValue] = useState(0);
     const [view, setView] = useState('table');
@@ -39,7 +42,7 @@ const Tasks = () => {
 
     const handleViewChange = (event, nextView) => {
       setView(nextView);
-    //   dispatch(addNewTask('action'));
+      dispatch(getKanbanData());
     };
 
     const handleChange = (event, newValue) => {
@@ -143,8 +146,8 @@ const Tasks = () => {
     const getRowId = (row) => {return row?.id}; 
 
     const columns = [
-        // { field: 'id', headerName: 'ID', 
-        // width: 70 },
+        { field: 'id', headerName: 'ID', 
+        width: 70 },
         {
             field: 'description',
             headerName: 'Task',
@@ -226,7 +229,7 @@ const Tasks = () => {
     console.log("tasks", tasks)
 
     return (
-        <Box width={"100%"}>
+        <Box >
             {/* Header */}
             <Box>
                 <Stack direction={'row'} justifyContent={'space-between'} alignItems={'center'}>
@@ -286,7 +289,7 @@ const Tasks = () => {
                                 />
                             </Box>
                         </StyledCard> :
-                        <Kanban />
+                        <Kanban kanbanTasks={kanbanTasks} />
                     }
                 </TabPanel>
                 {/* <TabPanel value={value} index={1}>

@@ -9,6 +9,7 @@ import SwipeableTemporaryDrawer from '../../components/sharedComponents/Drawer/S
 import StyledAppDrawer from '../../components/sharedComponents/AppBar/StyledAppBar';
 
 import { useWidth } from '../../utils/ssrMediaQuery';
+import { Hidden } from '@mui/material';
 
 const AppView = () => {
     
@@ -42,7 +43,7 @@ const AppView = () => {
                 <StyledDrawer open={open} setOpen={setOpen} /> :
                 <SwipeableTemporaryDrawer state={state} toggleDrawer={toggleDrawer}  open={open} setOpen={setOpen} />
             }
-            <Box component="main" sx={{ flexGrow: 1, p: 3, pt: 9 }}>
+            <Box component="main" sx={{ p: 3, pt: 9, overflowX: 'hidden' }}>
                 {/* keep it simple but significant */}
                 <Outlet />
             </Box>

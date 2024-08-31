@@ -15,14 +15,15 @@ const TaskCard = (props) => {
     }
 
     const getIconByTask = {
-        'feature': <AutoFixHighIcon/>,
-        'bug': <PestControlIcon/>
+        'Feature': <AutoFixHighIcon/>,
+        'Bug': <PestControlIcon/>
     }
     
     const getColorByPriority = {
         'High': theme.palette?.chip?.red,
         'Medium': theme.palette?.chip?.orange,
         'Low': theme.palette?.chip?.yellow,
+        'Critical': theme.palette?.chip?.red,
     }
 
     const StyledCard = styled(Card)({
@@ -90,7 +91,7 @@ return (
                         // },
                     }}
                 >
-                    {getIconByTask[props?.data?.task_type]}
+                    {getIconByTask[props?.data?.taskCategroy]}
                 </Box>
             </Grid>
             <Grid item xs={12}>
