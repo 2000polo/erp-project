@@ -100,9 +100,6 @@ const ListComponent = (props) => {
 
     const drag = (event, task) => {
         event.dataTransfer.setData('text/plain', event.currentTarget.dataset.id);
-        event.dataTransfer.setData('status', task.status);
-        console.log("target", task)
-        setCurrentStatus(() => task.status);
     };
 
     console.log("cards", cards)

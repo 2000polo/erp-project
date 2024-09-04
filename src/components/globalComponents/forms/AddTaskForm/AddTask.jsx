@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { addNewTask } from '../../../../app/tasks/taskSlice';
 import md5 from 'blueimp-md5';
+import { useSelector } from 'react-redux';
 
 const CustomTextField = styled(TextField)({
     '& .MuiInputLabel-root': {
@@ -33,6 +34,8 @@ const AddTask = () => {
     const dispatch = useDispatch();
 
     const [formValues, setFormValues] = useState({});
+
+    const projectNameList = useSelector((state) => state.projects.projectNameList)
     
     const handleInputChange = (e) => {
         // e.preventDefault();
@@ -55,6 +58,7 @@ const AddTask = () => {
                     "priority": formValues.priority,
                     "taskCategroy": formValues.taskCategroy,
                     "labels": formValues.labels,
+                    "project": formValues.project,
                     "status": 'open',
                     "progress": 0,
                     "sub_tasks": [],
@@ -86,19 +90,24 @@ const AddTask = () => {
                     required
                 />
                 <CustomTextField
-                    label="Department"
-                    name="department"
-                    value={formValues.department}
-                    onChange={(e) => handleInputChange(e)}
-                    required
-                    fullWidth
                     focused
+                    label="Project"
+                    name="project"
+                    value={formValues.project}
+                    onChange={(e) => handleInputChange(e)}
+                    fullWidth
+                    required
+                    id={'project'}
                     select
+
                 >
-                    <MenuItem value="Frontend">Frontend</MenuItem>
-                    <MenuItem value="Backend">Backend</MenuItem>
-                    <MenuItem value="UI/UX">UI/UX</MenuItem>
+                    {
+                        projectNameList?.map(({title, value}) => {
+                            return <MenuItem value={value}>{title}</MenuItem>
+                        })
+                    }
                 </CustomTextField>
+                
             </Stack>
             <CustomTextField
                 // color={'red'}
@@ -114,6 +123,7 @@ const AddTask = () => {
                 id={'desc'}
             />
             <Stack direction={'row'} spacing={2}>
+                
                 <CustomTextField
                     focused
                     label="Assigned to"
@@ -131,21 +141,20 @@ const AddTask = () => {
                     <MenuItem value="Developer 3">Developer 3</MenuItem>
                 </CustomTextField>
                 <CustomTextField
-                    focused
-                    label="Priority"
-                    name="priority"
-                    value={formValues.priority}
+                    label="Department"
+                    name="department"
+                    value={formValues.department}
                     onChange={(e) => handleInputChange(e)}
-                    fullWidth
                     required
-                    id={'priority'}
+                    fullWidth
+                    focused
                     select
                 >
-                    <MenuItem value="Critical">Critical</MenuItem>
-                    <MenuItem value="High">High</MenuItem>
-                    <MenuItem value="Medium">Medium</MenuItem>
-                    <MenuItem value="Low">Low</MenuItem>
+                    <MenuItem value="Frontend">Frontend</MenuItem>
+                    <MenuItem value="Backend">Backend</MenuItem>
+                    <MenuItem value="UI/UX">UI/UX</MenuItem>
                 </CustomTextField>
+                
                 <CustomTextField
                     focused
                     label="Task Category"
@@ -161,26 +170,48 @@ const AddTask = () => {
                     <MenuItem value="Feature">Feature</MenuItem>
                 </CustomTextField>
             </Stack>
-            <Autocomplete
-                multiple
-                // id="tags-outlined"
-                options={top100Films}
-                getOptionLabel={(option) => option.title}
-                // defaultValue={[top100Films[3]]}
-                // value={formValues.label}
-                filterSelectedOptions
-                name="labels"
-                onChange={(e, value) => setFormValues({ ...formValues, labels: value })}
-                renderInput={(params) => (
-                    <TextField
-                        {...params}
-                        label="Label"
-                        placeholder="lables"
-                        onChange={(e) => console.log(e)}
-                    />
-                )}
-                id={'label'}
-            />
+            <Stack direction={'row'} spacing={2}>
+                <CustomTextField
+                    focused
+                    label="Priority"
+                    name="priority"
+                    value={formValues.priority}
+                    onChange={(e) => handleInputChange(e)}
+                    fullWidth
+                    required
+                    id={'priority'}
+                    select
+                    // rows={4}
+                >
+                    <MenuItem value="Critical">Critical</MenuItem>
+                    <MenuItem value="High">High</MenuItem>
+                    <MenuItem value="Medium">Medium</MenuItem>
+                    <MenuItem value="Low">Low</MenuItem>
+                </CustomTextField>
+                
+                <Autocomplete
+                    multiple
+                    // id="tags-outlined"
+                    options={top100Films}
+                    getOptionLabel={(option) => option.title}
+                    // defaultValue={[top100Films[3]]}
+                    // value={formValues.label}
+                    filterSelectedOptions
+                    name="labels"
+                    onChange={(e, value) => setFormValues({ ...formValues, labels: value })}
+                    renderInput={(params) => (
+                        <TextField
+                            {...params}
+                            label="Label"
+                            placeholder="lables"
+                            onChange={(e) => console.log(e)}
+                        />
+                    )}
+                    id={'label'}
+                    fullWidth
+                />
+            </Stack>
+            
             <Button 
                 component="label"
                 role={undefined}
