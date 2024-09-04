@@ -43,7 +43,7 @@ const AppView = () => {
                 <StyledDrawer open={open} setOpen={setOpen} /> :
                 <SwipeableTemporaryDrawer state={state} toggleDrawer={toggleDrawer}  open={open} setOpen={setOpen} />
             }
-            <Box component="main" sx={{ p: 3, pt: 9, overflowX: 'hidden' }}>
+            <Box component="main" sx={{ p: 3, pt: 9, overflowX: 'hidden', width: '100%' }}>
                 {/* keep it simple but significant */}
                 <Outlet />
             </Box>

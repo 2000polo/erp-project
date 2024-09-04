@@ -190,8 +190,6 @@ const Projects = () => {
                     }
                 </Grid>
             </Box>
-            
-
         </>
         
         
