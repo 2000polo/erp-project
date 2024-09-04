@@ -283,14 +283,6 @@ export const taskSlice = createSlice({
 
     updateTaskById: (state, action) => {
       console.log("printing payload", action?.payload);
-      // return { ...state, 
-      //   tasks: state?.tasks?.map((task) => {
-      //     if( task?.id === action?.payload?.id){
-      //       return { ...task, sub_tasks: [...task?.sub_tasks, action?.payload?.data]}
-      //     }
-      //     return task
-      //   })
-      // }
       const updatedTasks = state?.tasks?.map((task) => {
         if (task?.id === action?.payload?.id) {
             console.log("Updating task:", task);
