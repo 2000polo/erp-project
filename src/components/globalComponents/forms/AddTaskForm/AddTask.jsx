@@ -72,8 +72,6 @@ const AddTask = () => {
         { title: 'hot fix', value: 'hot_fix' },
         { title: 'modification', value: 'modification' },
         { title: 'suggestion', value: 'suggestion' },
-        // { title: 'Developer 5', value: 54465 },
-        // { title: 'Developer 6', value: 65151 },
     ]
     
 

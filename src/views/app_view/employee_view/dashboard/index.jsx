@@ -9,6 +9,7 @@ import TaskOverview from './components/TaskOverview';
 import MeetingsNotifications from './components/MeetingsNotifications';
 import PrevDayUpdates from './components/PrevDayUpdates';
 import CurrentTask from './components/CurrentTask';
+import GanttChart from '../../../../components/globalComponents/GanttChart';
 
 const Dashboard = () => {
 
@@ -85,8 +86,11 @@ const Dashboard = () => {
                     {/* <Grid item xs={4}>
                         <Schedules />
                     </Grid> */}
+                    {/* <Grid item xs={12}>
+                        <TaskOverview />
+                    </Grid> */}
                     <Grid item xs={12}>
-                        {/* <TaskOverview /> */}
+                        <GanttChart />
                     </Grid>
                 </Grid>
                 <Grid item xs={3}>
