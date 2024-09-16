@@ -1,5 +1,5 @@
 import { styled, useTheme } from '@mui/material/styles';
-import { Collapse, IconButton, alpha } from '@mui/material';
+import { Collapse, IconButton, Typography, alpha } from '@mui/material';
 import Divider from '@mui/material/Divider';
 import List from '@mui/material/List';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
@@ -208,6 +208,8 @@ const StyledDrawer = (props) => {
         <>
             <Drawer variant="permanent" open={props?.open}>
                 <DrawerHeader>
+                    <Typography>Task Manager</Typography>
+                    
                     <IconButton onClick={handleDrawerClose}>
                         {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
                     </IconButton>
